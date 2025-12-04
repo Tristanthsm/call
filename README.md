@@ -16,4 +16,6 @@ cp .env.example .env
 npm start
 ```
 
+Depuis la racine du dépôt, vous pouvez également utiliser `npm run dev` (ou `npm start`) qui délègue automatiquement aux scripts du dossier `backend/`.
+
 Consultez `backend/README.md` pour la liste des endpoints et les instructions de tests.

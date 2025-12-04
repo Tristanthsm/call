@@ -1,0 +1,11 @@
+{
+  "name": "nexbuzzer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Scripts racine pour démarrer et tester le backend Nexbuzzer.",
+  "scripts": {
+    "dev": "npm run dev --prefix backend",
+    "start": "npm start --prefix backend",
+    "test": "npm test --prefix backend"
+  }
+}
