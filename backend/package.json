@@ -1,0 +1,14 @@
+{
+  "name": "nexbuzzer-backend",
+  "version": "0.1.0",
+  "description": "API HTTP minimaliste pour Nexbuzzer (appel à la minute, profils experts, paiements simulés).",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node src/index.js",
+    "test": "node --test"
+  },
+  "author": "",
+  "license": "MIT"
+}
