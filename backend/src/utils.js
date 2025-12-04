@@ -24,6 +24,11 @@ function sendJson(res, statusCode, payload) {
   res.end(JSON.stringify(payload));
 }
 
+function sendHtml(res, statusCode, html) {
+  res.writeHead(statusCode, { 'Content-Type': 'text/html; charset=utf-8' });
+  res.end(html);
+}
+
 function notFound(res) {
   sendJson(res, 404, { message: 'Ressource introuvable' });
 }
@@ -35,6 +40,7 @@ function badRequest(res, message) {
 module.exports = {
   parseJsonBody,
   sendJson,
+  sendHtml,
   notFound,
   badRequest,
 };
