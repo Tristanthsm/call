@@ -5,15 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nexbuzzer | Appels experts à la demande</title>
     <link rel="stylesheet" href="styles.css" />
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -43,48 +36,80 @@
     </header>
 
     <main>
-      <section id="home" class="section hero-section">
-        <div class="hero-content">
-          <div>
-            <p class="eyebrow">Appels audio/vidéo facturés à la minute</p>
-            <h2>Bookez un expert en quelques secondes</h2>
-            <p class="lead">
-              Parcourez les profils, vérifiez la disponibilité en temps réel et lancez un appel sécurisé.
-            </p>
-            <div class="search-bar">
-              <div class="input-icon">🔍</div>
-              <input type="search" id="hero-search" placeholder="Chercher un expert..." aria-label="Chercher un expert" />
-              <select id="hero-category" aria-label="Catégorie">
-                <option value="">Catégorie</option>
-              </select>
-              <button class="primary" id="hero-submit">Rechercher</button>
-            </div>
-            <p class="muted">💡 Ou découvrez les experts disponibles maintenant</p>
-          </div>
-          <div class="hero-visual">
-            <div class="call-card">
-              <div class="call-status">
-                <span class="badge-available">🟢 En ligne</span>
-                <span class="tiny-text">Facturation à la minute, sans engagement.</span>
+      <div class="hero-shell" id="home">
+        <section class="section hero-section">
+          <div class="hero-grid">
+            <div>
+              <div class="hero-pill">✨ Appels experts facturés à la minute</div>
+              <h2 class="hero-title">
+                Bookez un expert<br />
+                <span>en quelques secondes</span>
+              </h2>
+              <p class="hero-lead">
+                Parcourez les profils, vérifiez la disponibilité en temps réel et lancez un appel audio/vidéo.
+                <strong>Paiement sécurisé, transparent, à la minute.</strong>
+              </p>
+              <div class="hero-search">
+                <div class="input-wrap">
+                  <input
+                    type="search"
+                    id="hero-search"
+                    placeholder="🔍 Chercher un expert (coach, dev, mentor...)"
+                    aria-label="Chercher un expert"
+                  />
+                  <button class="primary" id="hero-submit">Rechercher</button>
+                </div>
               </div>
-              <div class="call-body">
-                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" alt="Expert en appel" />
-                <div>
-                  <p class="eyebrow">Prochain appel</p>
-                  <h3>Coaching Produit · 30 min</h3>
-                  <ul class="pill-list">
-                    <li>59 experts disponibles</li>
-                    <li>4.9/5 note moyenne</li>
-                    <li>12 appels en cours</li>
-                  </ul>
-                  <button class="primary wide">Trouver un expert</button>
-                  <p class="tiny-text">Paiement sécurisé, remboursement des minutes non utilisées.</p>
+              <a href="#available" class="hero-link">
+                Ou découvrez les experts disponibles maintenant
+                <svg class="w-5 h-5" width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div class="relative">
+              <div class="expert-card-hero">
+                <span class="status">🟢 En ligne</span>
+                <div class="profile">
+                  <div class="relative">
+                    <img src="https://i.pravatar.cc/150?img=1" alt="Portrait expert" />
+                    <div class="badge-available-overlay">✓</div>
+                  </div>
+                  <div>
+                    <div class="profile-top">
+                      <h3 class="text-xl font-bold text-gray-900">Sophie M.</h3>
+                      <span class="badge">Coach carrière</span>
+                    </div>
+                    <p class="muted">Coach carrière & leadership</p>
+                    <div class="rating">
+                      <span class="text-yellow-400">⭐⭐⭐⭐⭐</span>
+                      <span class="font-semibold">4.9</span>
+                      <span class="muted">(124 avis)</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="pricing">
+                  <p class="muted">Tarif</p>
+                  <p class="text-3xl font-bold text-gray-900">3€<span class="text-lg text-gray-600">/min</span></p>
+                </div>
+                <button class="primary wide">Appeler maintenant</button>
+              </div>
+              <div class="hero-stats" aria-hidden="true">
+                <div class="stat-card">
+                  <strong>15K+</strong>
+                  <span class="muted">Appels réalisés</span>
+                </div>
+                <div class="stat-card">
+                  <strong class="text-success">2.5K+</strong>
+                  <span class="muted">Experts actifs</span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       <section class="section steps">
         <div class="section-header">
@@ -118,7 +143,7 @@
         <div class="grid four" id="category-grid"></div>
       </section>
 
-      <section class="section available" aria-labelledby="available-title">
+      <section class="section available" aria-labelledby="available-title" id="available">
         <div class="section-header">
           <p class="eyebrow" id="available-title">Temps réel</p>
           <h3>Experts disponibles maintenant</h3>
@@ -133,10 +158,26 @@
           <h3>Pourquoi choisir Nexbuzzer ?</h3>
         </div>
         <div class="grid two">
-          <div class="info-card"> <span class="icon">💰</span><h4>Paiement à la minute</h4><p>Ultra flexible avec pré-autorisation et ajustement automatique.</p></div>
-          <div class="info-card"> <span class="icon">⚡</span><h4>Appels instantanés</h4><p>Connectez-vous immédiatement si l'expert est affiché disponible.</p></div>
-          <div class="info-card"> <span class="icon">🔒</span><h4>Sécurité Stripe</h4><p>Paiements encryptés, conformité PCI et protection contre la fraude.</p></div>
-          <div class="info-card"> <span class="icon">✅</span><h4>Experts vérifiés</h4><p>Badges, documents et avis vérifiés après chaque appel.</p></div>
+          <div class="info-card">
+            <span class="icon">💰</span>
+            <h4>Paiement à la minute</h4>
+            <p>Ultra flexible avec pré-autorisation et ajustement automatique.</p>
+          </div>
+          <div class="info-card">
+            <span class="icon">⚡</span>
+            <h4>Appels instantanés</h4>
+            <p>Connectez-vous immédiatement si l'expert est affiché disponible.</p>
+          </div>
+          <div class="info-card">
+            <span class="icon">🔒</span>
+            <h4>Sécurité Stripe</h4>
+            <p>Paiements encryptés, conformité PCI et protection contre la fraude.</p>
+          </div>
+          <div class="info-card">
+            <span class="icon">✅</span>
+            <h4>Experts vérifiés</h4>
+            <p>Badges, documents et avis vérifiés après chaque appel.</p>
+          </div>
         </div>
       </section>
 
@@ -166,9 +207,20 @@
       </section>
 
       <section id="search" class="section search-page" aria-labelledby="search-title">
-        <div class="section-header">
-          <p class="eyebrow" id="search-title">Recherche</p>
-          <h3>Trouvez votre expert</h3>
+        <div class="search-header">
+          <div class="search-shell">
+            <h3 class="search-title" id="search-title">Trouvez votre expert</h3>
+            <div class="search-actions">
+              <input type="search" id="search-input" placeholder="🔍 Chercher un expert..." aria-label="Chercher un expert" />
+              <select id="sort-select" aria-label="Tri">
+                <option value="pertinence">Trier par : Pertinence</option>
+                <option value="note">Note (décroissant)</option>
+                <option value="prix">Prix (croissant)</option>
+                <option value="disponibilite">Disponibilité</option>
+              </select>
+              <button class="primary" id="search-button">Rechercher</button>
+            </div>
+          </div>
         </div>
         <div class="search-wrapper">
           <aside class="filters" aria-label="Filtres de recherche">
@@ -178,38 +230,29 @@
             </div>
             <div class="filter-group">
               <p class="filter-title">Tarif / minute</p>
-              <label><input type="radio" name="price" value="all" checked /> Tous</label>
-              <label><input type="radio" name="price" value="0-3" /> 0-3€</label>
-              <label><input type="radio" name="price" value="3-5" /> 3-5€</label>
-              <label><input type="radio" name="price" value="5-10" /> 5-10€</label>
+              <label class="filter-checkbox"><input type="radio" name="price" value="all" checked /><span class="checkmark"></span><span class="label-text">Tous</span></label>
+              <label class="filter-checkbox"><input type="radio" name="price" value="0-3" /><span class="checkmark"></span><span class="label-text">0-3€</span></label>
+              <label class="filter-checkbox"><input type="radio" name="price" value="3-5" /><span class="checkmark"></span><span class="label-text">3-5€</span></label>
+              <label class="filter-checkbox"><input type="radio" name="price" value="5-10" /><span class="checkmark"></span><span class="label-text">5-10€</span></label>
             </div>
             <div class="filter-group">
               <p class="filter-title">Disponibilité</p>
-              <label><input type="checkbox" name="availability" value="disponible" /> Maintenant</label>
-              <label><input type="checkbox" name="availability" value="bientot" /> Aujourd'hui</label>
-              <label><input type="checkbox" name="availability" value="planning" /> Cette semaine</label>
+              <label class="filter-checkbox"><input type="checkbox" name="availability" value="disponible" checked /><span class="checkmark green"></span><span class="label-text">🟢 Disponible maintenant</span></label>
+              <label class="filter-checkbox"><input type="checkbox" name="availability" value="bientot" /><span class="checkmark"></span><span class="label-text">Aujourd'hui</span></label>
+              <label class="filter-checkbox"><input type="checkbox" name="availability" value="planning" /><span class="checkmark"></span><span class="label-text">Cette semaine</span></label>
             </div>
             <div class="filter-group">
               <p class="filter-title">Note minimale</p>
-              <input type="range" id="rating-range" min="0" max="5" step="0.1" value="0" />
+              <input class="range-slider" type="range" id="rating-range" min="0" max="5" step="0.1" value="0" />
               <p class="muted">Note: <span id="rating-value">0</span>+</p>
             </div>
-            <button class="ghost" id="clear-filters">Effacer filtres</button>
+            <button class="ghost" id="clear-filters">Effacer les filtres</button>
           </aside>
           <div class="results">
             <div class="results-toolbar">
-              <div class="search-inline">
-                <input type="search" id="search-input" placeholder="Rechercher un mot-clé" />
-                <button class="primary" id="search-button">Rechercher</button>
-              </div>
-              <select id="sort-select" aria-label="Tri">
-                <option value="pertinence">Trier par : Pertinence</option>
-                <option value="note">Note</option>
-                <option value="prix">Prix</option>
-                <option value="disponibilite">Disponibilité</option>
-              </select>
+              <div class="muted">Résultats mis à jour en temps réel</div>
             </div>
-            <div class="grid three" id="search-results"></div>
+            <div class="experts-grid" id="search-results"></div>
             <div class="pagination" id="pagination"></div>
           </div>
         </div>
@@ -259,10 +302,31 @@
           <p class="eyebrow" id="onboarding-title">Inscription expert</p>
           <h3>Onboarding expert en 3 étapes</h3>
         </div>
-        <div class="grid three">
-          <div class="info-card"><span class="icon">📄</span><h4>Profil complet</h4><p>Biographie, tarifs, langues, liens vers portfolios et certifications.</p></div>
-          <div class="info-card"><span class="icon">🗓️</span><h4>Disponibilités</h4><p>Planning en temps réel, activation de la prise d'appels instantanée.</p></div>
-          <div class="info-card"><span class="icon">🔗</span><h4>Connexion paiement</h4><p>Stripe Connect pour recevoir vos gains chaque semaine.</p></div>
+        <div class="progress-bar">
+          <div class="meta">
+            <span>Étape 1 sur 3</span>
+            <span>33% complété</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" style="width: 33%"></div>
+          </div>
+        </div>
+        <div class="steps-visual">
+          <div class="step active">
+            <div class="step-icon">1</div>
+            <h3>Profil complet</h3>
+            <p>Bio, tarifs, langues</p>
+          </div>
+          <div class="step">
+            <div class="step-icon">2</div>
+            <h3>Disponibilités</h3>
+            <p>Créneaux et calendrier</p>
+          </div>
+          <div class="step">
+            <div class="step-icon">3</div>
+            <h3>Paiement</h3>
+            <p>Connexion Stripe</p>
+          </div>
         </div>
         <form class="form-grid onboarding-form">
           <label>Nom complet<input type="text" placeholder="Prénom Nom" required /></label>
@@ -280,7 +344,7 @@
           <h3>Dashboards client et expert</h3>
         </div>
         <div class="grid two">
-          <div class="card dashboard-card">
+          <div class="dashboard-card">
             <div class="card-header">
               <h4>Dashboard Expert</h4>
               <span class="badge">Temps réel</span>
@@ -296,7 +360,7 @@
               <button class="ghost">Voir l'historique</button>
             </div>
           </div>
-          <div class="card dashboard-card">
+          <div class="dashboard-card alt">
             <div class="card-header">
               <h4>Dashboard Client</h4>
               <span class="badge">Historique</span>
@@ -345,36 +409,31 @@
 
     <footer class="footer">
       <div>
-        <h4>NEXBUZZER</h4>
+        <h4>Nexbuzzer</h4>
         <p>Votre expertise, à la minute.</p>
-      </div>
-      <div class="footer-links">
-        <div>
-          <p class="footer-title">Plateforme</p>
-          <a href="#home">Comment ça marche</a>
-          <a href="#categories-title">Catégories</a>
-          <a href="#search">FAQ</a>
-        </div>
-        <div>
-          <p class="footer-title">Pour les experts</p>
-          <a href="#onboarding">Devenir expert</a>
-          <a href="#dashboards">Tarifs</a>
-          <a href="#profile">Ressources</a>
-        </div>
-        <div>
-          <p class="footer-title">Légal</p>
-          <a href="#">CGU</a>
-          <a href="#">Confidentialité</a>
-          <a href="#">Mentions légales</a>
-        </div>
-      </div>
-      <div class="socials">
-        <p>Suivez-nous :</p>
         <div class="social-buttons">
           <a href="#" aria-label="LinkedIn">LinkedIn</a>
           <a href="#" aria-label="Twitter">Twitter</a>
           <a href="#" aria-label="Instagram">Instagram</a>
         </div>
+      </div>
+      <div class="footer-links">
+        <p class="footer-title">Plateforme</p>
+        <a href="#home">Comment ça marche</a>
+        <a href="#categories-title">Catégories</a>
+        <a href="#search">FAQ</a>
+      </div>
+      <div class="footer-links">
+        <p class="footer-title">Pour les experts</p>
+        <a href="#onboarding">Devenir expert</a>
+        <a href="#dashboards">Tarifs</a>
+        <a href="#profile">Ressources</a>
+      </div>
+      <div class="footer-links">
+        <p class="footer-title">Légal</p>
+        <a href="#">CGU</a>
+        <a href="#">Confidentialité</a>
+        <a href="#">Mentions légales</a>
       </div>
       <p class="muted">© 2025 Nexbuzzer. Tous droits réservés.</p>
     </footer>

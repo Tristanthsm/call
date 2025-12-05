@@ -50,7 +50,6 @@ const testimonials = [
 ];
 
 const categoriesContainer = document.getElementById('category-grid');
-const heroCategory = document.getElementById('hero-category');
 const availableRow = document.getElementById('available-row');
 const filterCategories = document.getElementById('filter-categories');
 const searchResults = document.getElementById('search-results');
@@ -71,13 +70,10 @@ function renderCategories() {
     )
     .join('');
 
-  heroCategory.innerHTML += categories
-    .map((cat) => `<option value="${cat.slug}">${cat.nom}</option>`)
-    .join('');
-
   filterCategories.innerHTML = categories
     .map(
-      (cat) => `<label><input type="checkbox" name="category" value="${cat.slug}" /> ${cat.nom}</label>`
+      (cat) =>
+        `<label class="filter-checkbox"><input type="checkbox" name="category" value="${cat.slug}" /><span class="checkmark"></span><span class="label-text">${cat.nom}</span><span class="count">(${cat.count})</span></label>`
     )
     .join('');
 }
@@ -87,10 +83,18 @@ function renderAvailable() {
   availableRow.innerHTML = available
     .map(
       (exp) => `<article class="expert-card">
-        <div class="meta"><span class="badge-available">🟢 DISPO</span><span>${exp.tarif}€/min</span></div>
-        <div class="meta"><img src="${exp.photo}" alt="${exp.nom}" /><div><h4>${exp.nom}</h4><p class="muted">${exp.metier}</p></div></div>
-        <p class="rating">⭐ ${exp.note} (${exp.avis})</p>
-        <button class="primary wide">Appeler →</button>
+        <div class="relative">
+          <img class="expert-photo" src="${exp.photo}" alt="${exp.nom}" />
+          <div class="badge-available-overlay">🟢 Dispo</div>
+        </div>
+        <h3 class="expert-title">${exp.nom}</h3>
+        <p class="expert-meta">${exp.metier}</p>
+        <div class="expert-rating"><span class="text-yellow-400">⭐⭐⭐⭐⭐</span><span class="font-semibold">${exp.note}</span><span class="muted">(${exp.avis})</span></div>
+        <div class="expert-pricing"><span class="amount">${exp.tarif}€</span><span class="muted">/min</span></div>
+        <div class="expert-buttons">
+          <button class="primary">📞 Appeler</button>
+          <button class="ghost">Voir profil</button>
+        </div>
       </article>`
     )
     .join('');
@@ -167,12 +171,17 @@ function renderSearch(sort = document.getElementById('sort-select').value) {
   searchResults.innerHTML = pageItems
     .map(
       (exp) => `<article class="expert-card">
-        <div class="meta"><div><h4>${exp.nom}</h4><p class="muted">${exp.metier}</p></div><span class="badge">${exp.tarif}€/min</span></div>
-        <div class="meta"><span class="rating">⭐ ${exp.note} (${exp.avis})</span><span>${exp.statut === 'disponible' ? '🟢 Disponible' : '📅 Planifiable'}</span></div>
-        <p class="muted">${exp.bio}</p>
-        <div class="meta">
+        <div class="relative">
+          <img class="expert-photo" src="${exp.photo}" alt="${exp.nom}" />
+          <div class="badge-available-overlay">${exp.statut === 'disponible' ? '🟢 Dispo' : '📅 Planifiable'}</div>
+        </div>
+        <h3 class="expert-title">${exp.nom}</h3>
+        <p class="expert-meta">${exp.metier}</p>
+        <div class="expert-rating"><span class="text-yellow-400">⭐⭐⭐⭐⭐</span><span class="font-semibold">${exp.note}</span><span class="muted">(${exp.avis})</span></div>
+        <div class="expert-pricing"><span class="amount">${exp.tarif}€</span><span class="muted">/min</span></div>
+        <div class="expert-buttons">
+          <button class="primary">📞 Appeler</button>
           <button class="ghost">Voir profil</button>
-          <button class="primary">Appeler</button>
         </div>
       </article>`
     )
@@ -270,10 +279,6 @@ function attachEvents() {
 
   document.getElementById('hero-submit').addEventListener('click', () => {
     document.getElementById('search-input').value = document.getElementById('hero-search').value;
-    const chosenCategory = document.getElementById('hero-category').value;
-    document.querySelectorAll('input[name="category"]').forEach((input) => {
-      input.checked = input.value === chosenCategory && chosenCategory !== '';
-    });
     renderSearch();
     document.getElementById('search').scrollIntoView({ behavior: 'smooth' });
   });
