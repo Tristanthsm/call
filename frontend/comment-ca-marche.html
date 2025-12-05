@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comment ça marche | Nexbuzzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="with-header">
+    <header class="topbar">
+      <div class="container topbar-content">
+        <a class="brand" href="/">
+          <div class="logo">N</div>
+          <div>
+            <div class="eyebrow">Appel Minute</div>
+            <span class="brand-name">Nexbuzzer</span>
+          </div>
+        </a>
+        <nav class="nav-links" aria-label="Navigation principale">
+          <a href="/experts.html">Trouver un expert</a>
+          <a class="active" href="/comment-ca-marche.html">Comment ça marche</a>
+          <a href="/devenir-expert.html">Devenir expert</a>
+          <a href="/tarifs.html">Tarifs</a>
+        </nav>
+        <div class="actions">
+          <a class="ghost" href="/login.html">Se connecter</a>
+          <a class="primary" href="/signup.html">S'inscrire</a>
+        </div>
+        <button class="burger" aria-label="Ouvrir le menu">☰</button>
+      </div>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="/experts.html">Trouver un expert</a>
+      <a href="/comment-ca-marche.html">Comment ça marche</a>
+      <a href="/devenir-expert.html">Devenir expert</a>
+      <a href="/tarifs.html">Tarifs</a>
+      <a href="/login.html">Se connecter</a>
+      <a class="primary" href="/signup.html">S'inscrire</a>
+    </div>
+
+    <main class="page">
+      <section class="page-hero">
+        <div class="container">
+          <h1>Nexbuzzer en 3 étapes simples</h1>
+          <p class="lead">Bookez un expert et payez uniquement ce que vous consommez</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <p class="eyebrow">Clients</p>
+            <h2>Comment booker un expert ?</h2>
+          </div>
+          <div class="grid three" id="client-steps"></div>
+        </div>
+      </section>
+
+      <section class="section light">
+        <div class="container">
+          <div class="section-header">
+            <p class="eyebrow">Experts</p>
+            <h2>Comment gagner de l'argent ?</h2>
+          </div>
+          <div class="grid three" id="expert-steps"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <p class="eyebrow">FAQ</p>
+            <h2>Questions fréquentes</h2>
+          </div>
+          <div class="accordion" id="faq"></div>
+        </div>
+      </section>
+
+      <section class="cta-final">
+        <div class="container cta-grid">
+          <div>
+            <h2>Prêt à commencer ?</h2>
+            <p>Choisissez un expert ou rejoignez la communauté de spécialistes.</p>
+          </div>
+          <div class="cta-buttons">
+            <a class="primary" href="/experts.html">Trouver un expert</a>
+            <a class="ghost" href="/devenir-expert.html">Devenir expert</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <h4>Nexbuzzer</h4>
+          <p class="muted">Votre expertise, à la minute.</p>
+        </div>
+        <div>
+          <p class="footer-title">Plateforme</p>
+          <a href="/comment-ca-marche.html">Comment ça marche</a>
+          <a href="/tarifs.html">Tarifs</a>
+          <a href="/experts.html">Trouver un expert</a>
+        </div>
+        <div>
+          <p class="footer-title">Experts</p>
+          <a href="/devenir-expert.html">Devenir expert</a>
+          <a href="/signup.html">S'inscrire</a>
+          <a href="/login.html">Se connecter</a>
+        </div>
+      </div>
+      <p class="muted copyright">© 2025 Nexbuzzer. Tous droits réservés.</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
