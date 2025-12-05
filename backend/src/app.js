@@ -2,7 +2,14 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 const { URL } = require('url');
-const { state, resetData, createCall, updateExpertRating } = require('./data');
+const {
+  state,
+  resetData,
+  createCall,
+  updateExpertRating,
+  createUser,
+  authenticateUser,
+} = require('./data');
 const { parseJsonBody, sendJson, notFound, badRequest } = require('./utils');
 
 
@@ -109,6 +116,45 @@ function createServer() {
 
     if (req.method === 'GET' && url.pathname === '/health') {
       sendJson(res, 200, { status: 'ok', uptime: process.uptime() });
+      return;
+    }
+
+    if (req.method === 'POST' && url.pathname === '/auth/signup') {
+      try {
+        const body = await parseJsonBody(req);
+        if (!body.email || !body.password) {
+          badRequest(res, 'Email et mot de passe requis');
+          return;
+        }
+        const user = createUser({
+          email: body.email,
+          password: body.password,
+          role: body.role || 'client',
+          fullName: body.fullName || '',
+        });
+        sendJson(res, 201, { user });
+      } catch (error) {
+        badRequest(res, error.message);
+      }
+      return;
+    }
+
+    if (req.method === 'POST' && url.pathname === '/auth/login') {
+      try {
+        const body = await parseJsonBody(req);
+        if (!body.email || !body.password) {
+          badRequest(res, 'Email et mot de passe requis');
+          return;
+        }
+        const result = authenticateUser(body.email, body.password);
+        if (!result) {
+          badRequest(res, 'Identifiants invalides');
+          return;
+        }
+        sendJson(res, 200, result);
+      } catch (error) {
+        badRequest(res, error.message);
+      }
       return;
     }
 
