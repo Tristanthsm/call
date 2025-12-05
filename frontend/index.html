@@ -30,8 +30,8 @@
         <a href="#settings">Paramètres</a>
       </nav>
       <div class="cta-actions">
-        <button class="ghost">Se connecter</button>
-        <button class="primary">Commencer</button>
+        <a class="ghost" href="#auth">Se connecter</a>
+        <a class="primary" href="#auth">Commencer</a>
       </div>
     </header>
 
@@ -195,6 +195,57 @@
           <div><p class="stat-number">15 000+</p><p class="stat-label">Appels réalisés</p></div>
           <div><p class="stat-number">2 500+</p><p class="stat-label">Experts actifs</p></div>
           <div><p class="stat-number">98%</p><p class="stat-label">Satisfaction moyenne</p></div>
+        </div>
+      </section>
+
+      <section id="auth" class="section auth" aria-labelledby="auth-title">
+        <div class="section-header">
+          <p class="eyebrow" id="auth-title">Compte</p>
+          <h3>Connexion et création de compte</h3>
+          <p class="muted">
+            Utilisez votre email et un mot de passe pour vous connecter ou créer un compte client/expert.
+          </p>
+        </div>
+        <div class="auth-grid">
+          <div class="auth-card">
+            <div class="card-header">
+              <div>
+                <p class="eyebrow">Connexion</p>
+                <h4>Déjà un compte ?</h4>
+              </div>
+              <span class="badge">Token en mémoire</span>
+            </div>
+            <form id="login-form" class="form-grid auth-form">
+              <label>Email<input type="email" name="email" placeholder="vous@email.com" required /></label>
+              <label>Mot de passe<input type="password" name="password" placeholder="••••••••" required /></label>
+              <p class="form-helper">Un token de session est généré et stocké localement.</p>
+              <p class="form-message" id="login-message" hidden></p>
+              <button class="primary" type="submit">Se connecter</button>
+            </form>
+          </div>
+          <div class="auth-card alt">
+            <div class="card-header">
+              <div>
+                <p class="eyebrow">Inscription</p>
+                <h4>Nouveau sur Nexbuzzer ?</h4>
+              </div>
+              <span class="badge">Création instantanée</span>
+            </div>
+            <form id="signup-form" class="form-grid auth-form">
+              <label>Nom complet<input type="text" name="fullName" placeholder="Prénom Nom" /></label>
+              <label>Email<input type="email" name="email" placeholder="vous@email.com" required /></label>
+              <label>Mot de passe<input type="password" name="password" placeholder="••••••••" required /></label>
+              <label>Rôle
+                <select name="role">
+                  <option value="client">Client</option>
+                  <option value="expert">Expert</option>
+                </select>
+              </label>
+              <p class="form-helper">Les profils sont stockés en mémoire côté API pour ce MVP.</p>
+              <p class="form-message" id="signup-message" hidden></p>
+              <button class="primary" type="submit">Créer mon compte</button>
+            </form>
+          </div>
         </div>
       </section>
 

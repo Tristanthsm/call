@@ -58,6 +58,7 @@ const ratingRange = document.getElementById('rating-range');
 const ratingValue = document.getElementById('rating-value');
 const testimonialCard = document.getElementById('testimonial-card');
 const testimonialDots = document.getElementById('testimonial-dots');
+const apiBase = window.API_BASE || 'http://localhost:4000';
 
 let currentTestimonial = 0;
 let currentPage = 1;
@@ -246,6 +247,78 @@ function cycleTestimonials() {
   renderTestimonials();
 }
 
+function showFormMessage(element, type, text) {
+  if (!element) return;
+  element.textContent = text;
+  element.className = `form-message ${type}`;
+  element.hidden = false;
+}
+
+async function submitAuth(endpoint, payload) {
+  const response = await fetch(`${apiBase}${endpoint}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.error || data.message || 'Une erreur est survenue');
+  }
+  return data;
+}
+
+function attachAuthHandlers() {
+  const loginForm = document.getElementById('login-form');
+  const signupForm = document.getElementById('signup-form');
+
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const messageEl = document.getElementById('login-message');
+      messageEl.hidden = true;
+      const formData = new FormData(loginForm);
+      try {
+        const payload = {
+          email: formData.get('email'),
+          password: formData.get('password'),
+        };
+        const data = await submitAuth('/auth/login', payload);
+        localStorage.setItem('sessionToken', data.token);
+        showFormMessage(
+          messageEl,
+          'success',
+          `Connexion réussie pour ${data.user.email}. Token stocké localement.`
+        );
+      } catch (error) {
+        showFormMessage(messageEl, 'error', error.message);
+      }
+    });
+  }
+
+  if (signupForm) {
+    signupForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const messageEl = document.getElementById('signup-message');
+      messageEl.hidden = true;
+      const formData = new FormData(signupForm);
+      try {
+        const payload = {
+          email: formData.get('email'),
+          password: formData.get('password'),
+          fullName: formData.get('fullName'),
+          role: formData.get('role'),
+        };
+        await submitAuth('/auth/signup', payload);
+        showFormMessage(messageEl, 'success', 'Compte créé avec succès. Vous pouvez vous connecter.');
+        signupForm.reset();
+      } catch (error) {
+        showFormMessage(messageEl, 'error', error.message);
+      }
+    });
+  }
+}
+
 function attachEvents() {
   document.querySelectorAll('.tab').forEach((tab) => {
     tab.addEventListener('click', () => {
@@ -282,6 +355,8 @@ function attachEvents() {
     renderSearch();
     document.getElementById('search').scrollIntoView({ behavior: 'smooth' });
   });
+
+  attachAuthHandlers();
 }
 
 renderCategories();
