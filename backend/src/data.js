@@ -1,4 +1,4 @@
-const { randomUUID } = require('crypto');
+const { randomUUID, randomBytes, scryptSync, timingSafeEqual } = require('crypto');
 
 const baseExperts = [
   {
@@ -38,6 +38,8 @@ const baseExperts = [
 let experts = baseExperts.map((expert) => ({ ...expert }));
 let calls = [];
 let reviews = [];
+let users = [];
+let sessions = [];
 
 const state = {
   get experts() {
@@ -49,12 +51,81 @@ const state = {
   get reviews() {
     return reviews;
   },
+  get users() {
+    return users;
+  },
+  get sessions() {
+    return sessions;
+  },
 };
 
 function resetData() {
   experts = baseExperts.map((expert) => ({ ...expert }));
   calls = [];
   reviews = [];
+  users = [];
+  sessions = [];
+}
+
+function sanitizeUser(user) {
+  if (!user) return null;
+  // Retirer les informations sensibles
+  const { passwordHash, passwordSalt, ...publicUser } = user;
+  return publicUser;
+}
+
+function hashPassword(password, salt = randomBytes(16).toString('hex')) {
+  const hash = scryptSync(password, salt, 64).toString('hex');
+  return { hash, salt };
+}
+
+function createUser({ email, password, role = 'client', fullName = '' }) {
+  const normalizedEmail = email?.toLowerCase();
+  if (!normalizedEmail) {
+    throw new Error('Email requis');
+  }
+  if (!password || password.length < 8) {
+    throw new Error('Mot de passe trop court (8 caractères minimum).');
+  }
+  const existing = users.find((user) => user.email === normalizedEmail);
+  if (existing) {
+    throw new Error('Email déjà enregistré.');
+  }
+
+  const { hash, salt } = hashPassword(password);
+  const user = {
+    id: randomUUID(),
+    email: normalizedEmail,
+    role,
+    fullName,
+    passwordHash: hash,
+    passwordSalt: salt,
+    createdAt: new Date().toISOString(),
+    lastLoginAt: null,
+  };
+
+  users.push(user);
+  return sanitizeUser(user);
+}
+
+function authenticateUser(email, password) {
+  const normalizedEmail = email?.toLowerCase();
+  const user = users.find((item) => item.email === normalizedEmail);
+  if (!user || !password) {
+    return null;
+  }
+
+  const hash = scryptSync(password, user.passwordSalt, 64).toString('hex');
+  const isMatch = timingSafeEqual(Buffer.from(hash, 'hex'), Buffer.from(user.passwordHash, 'hex'));
+  if (!isMatch) {
+    return null;
+  }
+
+  user.lastLoginAt = new Date().toISOString();
+  const token = randomUUID();
+  sessions.push({ token, userId: user.id, createdAt: new Date().toISOString() });
+
+  return { user: sanitizeUser(user), token };
 }
 
 function createCall({ expertId, clientId, dureeMax }) {
@@ -99,4 +170,7 @@ module.exports = {
   resetData,
   createCall,
   updateExpertRating,
+  createUser,
+  authenticateUser,
+  sanitizeUser,
 };
