@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tarifs | Nexbuzzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="with-header">
+    <header class="topbar">
+      <div class="container topbar-content">
+        <a class="brand" href="/">
+          <div class="logo">N</div>
+          <div>
+            <div class="eyebrow">Appel Minute</div>
+            <span class="brand-name">Nexbuzzer</span>
+          </div>
+        </a>
+        <nav class="nav-links" aria-label="Navigation principale">
+          <a href="/experts.html">Trouver un expert</a>
+          <a href="/comment-ca-marche.html">Comment ça marche</a>
+          <a href="/devenir-expert.html">Devenir expert</a>
+          <a class="active" href="/tarifs.html">Tarifs</a>
+        </nav>
+        <div class="actions">
+          <a class="ghost" href="/login.html">Se connecter</a>
+          <a class="primary" href="/signup.html">S'inscrire</a>
+        </div>
+        <button class="burger" aria-label="Ouvrir le menu">☰</button>
+      </div>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="/experts.html">Trouver un expert</a>
+      <a href="/comment-ca-marche.html">Comment ça marche</a>
+      <a href="/devenir-expert.html">Devenir expert</a>
+      <a href="/tarifs.html">Tarifs</a>
+      <a href="/login.html">Se connecter</a>
+      <a class="primary" href="/signup.html">S'inscrire</a>
+    </div>
+
+    <main class="page">
+      <section class="page-hero">
+        <div class="container">
+          <h1>Tarification simple et transparente</h1>
+          <p class="lead">Payez uniquement ce que vous consommez. Aucun frais caché.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container pricing-cards">
+          <article class="pricing-card">
+            <span class="icon">💳</span>
+            <h2>PAIEMENT À LA MINUTE</h2>
+            <ul>
+              <li>✅ Vous payez uniquement le temps d'appel réel</li>
+              <li>✅ Remboursement automatique des minutes non utilisées</li>
+              <li>✅ Aucun frais caché ni frais de plateforme</li>
+              <li>✅ Annulation gratuite avant l'appel</li>
+            </ul>
+            <p class="muted">Tarifs experts : 2€ à 10€/min • Tarif moyen : 4€/min</p>
+            <a class="primary wide" href="/experts.html">Trouver un expert →</a>
+          </article>
+
+          <article class="pricing-card">
+            <span class="icon">💼</span>
+            <h2>COMMISSION 15% PAR APPEL</h2>
+            <ul>
+              <li>✅ Aucun abonnement mensuel</li>
+              <li>✅ Commission uniquement sur vos appels réalisés</li>
+              <li>✅ Paiements hebdomadaires via Stripe Connect</li>
+              <li>✅ Vous fixez librement votre tarif (2-10€/min)</li>
+            </ul>
+            <pre class="muted">Appel de 30 minutes à 5€/min :
+→ Client paie : 150€
+→ Vous recevez : 127,50€ (85%)
+→ Nexbuzzer : 22,50€ (15%)</pre>
+            <a class="ghost wide" href="/devenir-expert.html">Devenir expert →</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <p class="eyebrow">FAQ</p>
+            <h2>Questions fréquentes sur la tarification</h2>
+          </div>
+          <div class="accordion" id="pricing-faq"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <h4>Nexbuzzer</h4>
+          <p class="muted">Votre expertise, à la minute.</p>
+        </div>
+        <div>
+          <p class="footer-title">Plateforme</p>
+          <a href="/comment-ca-marche.html">Comment ça marche</a>
+          <a href="/tarifs.html">Tarifs</a>
+          <a href="/experts.html">Trouver un expert</a>
+        </div>
+        <div>
+          <p class="footer-title">Experts</p>
+          <a href="/devenir-expert.html">Devenir expert</a>
+          <a href="/signup.html">S'inscrire</a>
+          <a href="/login.html">Se connecter</a>
+        </div>
+      </div>
+      <p class="muted copyright">© 2025 Nexbuzzer. Tous droits réservés.</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

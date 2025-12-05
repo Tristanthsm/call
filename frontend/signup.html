@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inscription | Nexbuzzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="with-header">
+    <header class="topbar">
+      <div class="container topbar-content">
+        <a class="brand" href="/">
+          <div class="logo">N</div>
+          <div>
+            <div class="eyebrow">Appel Minute</div>
+            <span class="brand-name">Nexbuzzer</span>
+          </div>
+        </a>
+        <nav class="nav-links" aria-label="Navigation principale">
+          <a href="/experts.html">Trouver un expert</a>
+          <a href="/comment-ca-marche.html">Comment ça marche</a>
+          <a href="/devenir-expert.html">Devenir expert</a>
+          <a href="/tarifs.html">Tarifs</a>
+        </nav>
+        <div class="actions">
+          <a class="ghost" href="/login.html">Se connecter</a>
+          <a class="primary" href="/signup.html">S'inscrire</a>
+        </div>
+        <button class="burger" aria-label="Ouvrir le menu">☰</button>
+      </div>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="/experts.html">Trouver un expert</a>
+      <a href="/comment-ca-marche.html">Comment ça marche</a>
+      <a href="/devenir-expert.html">Devenir expert</a>
+      <a href="/tarifs.html">Tarifs</a>
+      <a href="/login.html">Se connecter</a>
+      <a class="primary" href="/signup.html">S'inscrire</a>
+    </div>
+
+    <main class="auth-page">
+      <div class="auth-box">
+        <h1>Créer un compte</h1>
+        <p class="muted">Choisissez votre type de compte</p>
+        <div class="account-type" id="account-type">
+          <label class="card-option active" data-type="client">
+            <input type="radio" name="type" value="client" checked />
+            <span class="icon">🔍</span>
+            <div>
+              <h3>Je cherche un expert</h3>
+              <p class="muted">Accédez à des milliers d'experts disponibles</p>
+            </div>
+          </label>
+          <label class="card-option" data-type="expert">
+            <input type="radio" name="type" value="expert" />
+            <span class="icon">💼</span>
+            <div>
+              <h3>Je suis un expert</h3>
+              <p class="muted">Monétisez votre expertise à la minute</p>
+            </div>
+          </label>
+        </div>
+
+        <form class="auth-form" id="signup-form">
+          <div class="form-row">
+            <label>Prénom
+              <input type="text" required />
+            </label>
+            <label>Nom
+              <input type="text" required />
+            </label>
+          </div>
+          <label>Email
+            <input type="email" required />
+          </label>
+          <label>Mot de passe
+            <input type="password" required />
+            <span class="muted">Force : sécurisée</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" required />
+            <span class="checkmark"></span>
+            <span class="label-text">J'accepte les CGU et la politique de confidentialité</span>
+          </label>
+          <button class="primary wide" type="submit">Créer mon compte</button>
+        </form>
+        <div class="separator">— OU —</div>
+        <button class="ghost wide">S'inscrire avec Google</button>
+        <p class="muted center">Déjà un compte ? <a class="link" href="/login.html">Se connecter</a></p>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <h4>Nexbuzzer</h4>
+          <p class="muted">Votre expertise, à la minute.</p>
+        </div>
+        <div>
+          <p class="footer-title">Plateforme</p>
+          <a href="/comment-ca-marche.html">Comment ça marche</a>
+          <a href="/tarifs.html">Tarifs</a>
+          <a href="/experts.html">Trouver un expert</a>
+        </div>
+        <div>
+          <p class="footer-title">Experts</p>
+          <a href="/devenir-expert.html">Devenir expert</a>
+          <a href="/signup.html">S'inscrire</a>
+          <a href="/login.html">Se connecter</a>
+        </div>
+      </div>
+      <p class="muted copyright">© 2025 Nexbuzzer. Tous droits réservés.</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

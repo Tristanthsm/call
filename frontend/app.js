@@ -9,404 +9,320 @@ const categories = [
   { nom: 'Langues', icon: '🌍', count: 87, slug: 'langues' },
 ];
 
-const categoryKeywords = {
-  coaching: ['coach', 'leadership', 'carrière', 'mindfulness', 'freelance'],
-  tech: ['dev', 'engineer', 'cloud', 'sécurité', 'mlops', 'react', 'node'],
-  business: ['business', 'product', 'pricing', 'strategy', 'growth'],
-  creation: ['design', 'ux', 'création', 'prototypage', 'design sprint'],
-  'bien-etre': ['stress', 'bien-être', 'mindfulness', 'sommeil'],
-  juridique: ['juriste', 'rgpd', 'contrats', 'conformité'],
-  finance: ['finance', 'bp', 'cashflow', 'reporting'],
-  langues: ['langue', 'anglais', 'prononciation'],
-};
-
 const experts = [
-  { id: 1, nom: 'Sophie Martin', metier: 'Coach carrière', photo: 'https://i.pravatar.cc/150?img=1', tarif: 3, note: 4.9, avis: 124, statut: 'disponible', bio: '15 ans d’accompagnement de managers et de reconversions.', badges: ['Vérifié', 'Top Expert', 'ICF'], specialites: ['Reconversion', 'Leadership', 'Confiance'], langue: 'Français, Anglais', ville: 'Paris, France' },
-  { id: 2, nom: 'Thomas Dubois', metier: 'Développeur Senior', photo: 'https://i.pravatar.cc/150?img=12', tarif: 5, note: 5.0, avis: 89, statut: 'disponible', bio: 'Expert React/Node.js, mentor produit-tech pour scale-ups.', badges: ['Vérifié', 'Tech Lead'], specialites: ['React', 'Architecture', 'Mentorat'], langue: 'Français, Anglais', ville: 'Lyon, France' },
-  { id: 3, nom: 'Julie Petit', metier: 'UX Designer', photo: 'https://i.pravatar.cc/150?img=5', tarif: 4, note: 4.8, avis: 156, statut: 'disponible', bio: 'Design systems, recherche utilisateur et ateliers sprint.', badges: ['Vérifié'], specialites: ['Design system', 'Tests utilisateurs', 'Facilitation'], langue: 'Français', ville: 'Nantes, France' },
-  { id: 4, nom: 'Amine Salah', metier: 'Consultant Growth', photo: 'https://i.pravatar.cc/150?img=15', tarif: 3, note: 4.7, avis: 112, statut: 'bientot', bio: 'AB testing, acquisition payante et CRM performance.', badges: ['Vérifié', 'Top Expert'], specialites: ['AB testing', 'SEA', 'CRM'], langue: 'Français, Anglais', ville: 'Marseille, France' },
-  { id: 5, nom: 'Claire Renault', metier: 'Coach leadership', photo: 'https://i.pravatar.cc/150?img=7', tarif: 6, note: 4.95, avis: 201, statut: 'disponible', bio: 'Leadership exécutif et coaching de comité de direction.', badges: ['Vérifié'], specialites: ['Leadership', 'Coaching exec', 'Feedback'], langue: 'Français', ville: 'Paris, France' },
-  { id: 6, nom: 'Leo Martins', metier: 'Engineer Cloud', photo: 'https://i.pravatar.cc/150?img=20', tarif: 5, note: 4.9, avis: 143, statut: 'planning', bio: 'AWS, GCP, optimisation coûts et sécurité.', badges: ['Vérifié'], specialites: ['AWS', 'FinOps', 'Sécurité'], langue: 'Français, Anglais', ville: 'Luxembourg' },
-  { id: 7, nom: 'Camille Roy', metier: 'Product Manager', photo: 'https://i.pravatar.cc/150?img=32', tarif: 4, note: 4.8, avis: 98, statut: 'disponible', bio: 'Discovery, roadmaps KPI-driven et facilitation.', badges: ['Vérifié'], specialites: ['Discovery', 'Priorisation', 'Go-to-market'], langue: 'Français', ville: 'Bordeaux, France' },
-  { id: 8, nom: 'Lucas Perrin', metier: 'Data Scientist', photo: 'https://i.pravatar.cc/150?img=40', tarif: 5, note: 4.9, avis: 77, statut: 'disponible', bio: 'MLOps, métriques produit et modèles de scoring.', badges: ['Vérifié'], specialites: ['MLOps', 'Scoring', 'Analytics'], langue: 'Français, Anglais', ville: 'Paris, France' },
-  { id: 9, nom: 'Nadia Ben', metier: 'Marketing B2B', photo: 'https://i.pravatar.cc/150?img=45', tarif: 3, note: 4.6, avis: 134, statut: 'bientot', bio: 'Positionnement, ABM et contenus à forte conversion.', badges: ['Vérifié'], specialites: ['ABM', 'Content', 'SEO'], langue: 'Français, Anglais', ville: 'Lille, France' },
-  { id: 10, nom: 'Hugo Carpentier', metier: 'Coach Sales', photo: 'https://i.pravatar.cc/150?img=52', tarif: 4, note: 4.9, avis: 165, statut: 'disponible', bio: 'Playbooks SDR, closing et négociation grands comptes.', badges: ['Vérifié', 'Top Expert'], specialites: ['SDR', 'Closing', 'Playbooks'], langue: 'Français, Anglais', ville: 'Lyon, France' },
-  { id: 11, nom: 'Mina Zhao', metier: 'Stratégie produit', photo: 'https://i.pravatar.cc/150?img=55', tarif: 6, note: 5.0, avis: 92, statut: 'disponible', bio: 'Product ops, packaging et pricing pour SaaS.', badges: ['Vérifié'], specialites: ['Pricing', 'Product ops', 'Packaging'], langue: 'Anglais, Français', ville: 'Londres, UK' },
-  { id: 12, nom: 'Arnaud Lefèvre', metier: 'Juriste RGPD', photo: 'https://i.pravatar.cc/150?img=61', tarif: 4, note: 4.8, avis: 58, statut: 'disponible', bio: 'Mise en conformité RGPD et gouvernance des données.', badges: ['Vérifié'], specialites: ['RGPD', 'Contrats', 'Données'], langue: 'Français', ville: 'Paris, France' },
-  { id: 13, nom: 'Sara Costa', metier: 'Coach bien-être', photo: 'https://i.pravatar.cc/150?img=64', tarif: 3, note: 4.7, avis: 102, statut: 'planning', bio: 'Gestion du stress, routines et équilibre pro/perso.', badges: ['Vérifié'], specialites: ['Stress', 'Sommeil', 'Mindfulness'], langue: 'Français, Portugais', ville: 'Lisbonne, Portugal' },
-  { id: 14, nom: 'Daniel Kim', metier: 'Ingénieur Sécurité', photo: 'https://i.pravatar.cc/150?img=70', tarif: 7, note: 5.0, avis: 71, statut: 'disponible', bio: 'Audit sécurité, pentest et remédiations priorisées.', badges: ['Vérifié'], specialites: ['Sécurité', 'Pentest', 'IAM'], langue: 'Anglais', ville: 'Berlin, Allemagne' },
-  { id: 15, nom: 'Élodie Garnier', metier: 'Consultante Finance', photo: 'https://i.pravatar.cc/150?img=75', tarif: 5, note: 4.85, avis: 88, statut: 'disponible', bio: 'Modèles financiers, BP investisseurs et cashflow.', badges: ['Vérifié'], specialites: ['BP', 'Cashflow', 'Reporting'], langue: 'Français', ville: 'Paris, France' },
-  { id: 16, nom: 'Yanis Guérin', metier: 'Coach langues', photo: 'https://i.pravatar.cc/150?img=78', tarif: 2, note: 4.6, avis: 142, statut: 'disponible', bio: 'Sessions immersives anglais business et pitch.', badges: ['Vérifié'], specialites: ['Anglais', 'Pitch', 'Prononciation'], langue: 'Français, Anglais', ville: 'Montréal, Canada' },
-  { id: 17, nom: 'Isabelle Noël', metier: 'Facilitatrice Design Sprint', photo: 'https://i.pravatar.cc/150?img=83', tarif: 4, note: 4.9, avis: 119, statut: 'bientot', bio: 'Workshops sprint, priorisation et prototypage rapide.', badges: ['Vérifié'], specialites: ['Design sprint', 'Ateliers', 'Prototypage'], langue: 'Français', ville: 'Bruxelles, Belgique' },
-  { id: 18, nom: 'Marc Delcourt', metier: 'Coach freelance', photo: 'https://i.pravatar.cc/150?img=85', tarif: 3, note: 4.7, avis: 136, statut: 'disponible', bio: 'Positionnement freelance, pricing et closing direct.', badges: ['Vérifié'], specialites: ['Pricing', 'Closing', 'Positionnement'], langue: 'Français', ville: 'Toulouse, France' },
-  { id: 19, nom: 'Priya Patel', metier: 'Consultante Data Gouvernance', photo: 'https://i.pravatar.cc/150?img=88', tarif: 6, note: 4.9, avis: 67, statut: 'planning', bio: 'Data lineage, catalogues et conformité multi-pays.', badges: ['Vérifié'], specialites: ['Data governance', 'Catalogues', 'Compliance'], langue: 'Anglais', ville: 'Dublin, Irlande' },
-  { id: 20, nom: 'Alexandre Moreau', metier: 'Coach produit', photo: 'https://i.pravatar.cc/150?img=90', tarif: 4, note: 4.8, avis: 121, statut: 'disponible', bio: 'Stratégie produit, discovery continue et communication.', badges: ['Vérifié'], specialites: ['Roadmap', 'Discovery', 'Storytelling'], langue: 'Français', ville: 'Lyon, France' },
+  { id: 1, nom: 'Sophie Martin', metier: 'Coach carrière', photo: 'https://i.pravatar.cc/150?img=1', tarif: 3, note: 4.9, avis: 124, statut: 'disponible', category: 'coaching', badges: ['verifie', 'top'], dispoLabel: '🟢 Disponible' },
+  { id: 2, nom: 'Thomas Dubois', metier: 'Développeur Senior', photo: 'https://i.pravatar.cc/150?img=12', tarif: 5, note: 5.0, avis: 89, statut: 'disponible', category: 'tech', badges: ['verifie'], dispoLabel: '🟢 Disponible' },
+  { id: 3, nom: 'Julie Petit', metier: 'UX Designer', photo: 'https://i.pravatar.cc/150?img=5', tarif: 4, note: 4.8, avis: 156, statut: 'disponible', category: 'creation', badges: ['verifie'], dispoLabel: '🟢 Disponible' },
+  { id: 4, nom: 'Amine Salah', metier: 'Consultant Growth', photo: 'https://i.pravatar.cc/150?img=15', tarif: 3, note: 4.7, avis: 112, statut: 'planning', category: 'business', badges: ['verifie'], dispoLabel: '📅 Planifiable' },
+  { id: 5, nom: 'Claire Renault', metier: 'Coach leadership', photo: 'https://i.pravatar.cc/150?img=7', tarif: 6, note: 4.95, avis: 201, statut: 'disponible', category: 'coaching', badges: ['verifie'], dispoLabel: '🟢 Disponible' },
+  { id: 6, nom: 'Leo Martins', metier: 'Engineer Cloud', photo: 'https://i.pravatar.cc/150?img=20', tarif: 5, note: 4.9, avis: 143, statut: 'planning', category: 'tech', badges: ['verifie'], dispoLabel: '📅 Planifiable' },
+  { id: 7, nom: 'Camille Roy', metier: 'Product Manager', photo: 'https://i.pravatar.cc/150?img=32', tarif: 4, note: 4.8, avis: 98, statut: 'disponible', category: 'business', badges: ['verifie'], dispoLabel: '🟢 Disponible' },
+  { id: 8, nom: 'Lucas Perrin', metier: 'Data Scientist', photo: 'https://i.pravatar.cc/150?img=40', tarif: 5, note: 4.9, avis: 77, statut: 'disponible', category: 'tech', badges: ['verifie'], dispoLabel: '🟢 Disponible' },
+  { id: 9, nom: 'Nadia Ben', metier: 'Marketing B2B', photo: 'https://i.pravatar.cc/150?img=45', tarif: 3, note: 4.6, avis: 134, statut: 'planning', category: 'business', badges: [], dispoLabel: '📅 Planifiable' },
+  { id: 10, nom: 'Hugo Carpentier', metier: 'Coach Sales', photo: 'https://i.pravatar.cc/150?img=52', tarif: 4, note: 4.9, avis: 165, statut: 'disponible', category: 'business', badges: ['top'], dispoLabel: '🟢 Disponible' },
+  { id: 11, nom: 'Mina Zhao', metier: 'Stratégie produit', photo: 'https://i.pravatar.cc/150?img=55', tarif: 6, note: 5.0, avis: 92, statut: 'disponible', category: 'business', badges: ['verifie'], dispoLabel: '🟢 Disponible' },
+  { id: 12, nom: 'Arnaud Lefèvre', metier: 'Juriste RGPD', photo: 'https://i.pravatar.cc/150?img=61', tarif: 4, note: 4.8, avis: 58, statut: 'disponible', category: 'juridique', badges: ['verifie'], dispoLabel: '🟢 Disponible' },
+  { id: 13, nom: 'Sara Costa', metier: 'Coach bien-être', photo: 'https://i.pravatar.cc/150?img=64', tarif: 3, note: 4.7, avis: 102, statut: 'planning', category: 'bien-etre', badges: [], dispoLabel: '📅 Planifiable' },
+  { id: 14, nom: 'Daniel Kim', metier: 'Ingénieur Sécurité', photo: 'https://i.pravatar.cc/150?img=70', tarif: 7, note: 5.0, avis: 71, statut: 'disponible', category: 'tech', badges: ['verifie'], dispoLabel: '🟢 Disponible' },
+  { id: 15, nom: 'Élodie Garnier', metier: 'Consultante Finance', photo: 'https://i.pravatar.cc/150?img=75', tarif: 5, note: 4.85, avis: 88, statut: 'disponible', category: 'finance', badges: ['verifie'], dispoLabel: '🟢 Disponible' },
+  { id: 16, nom: 'Yanis Guérin', metier: 'Coach langues', photo: 'https://i.pravatar.cc/150?img=78', tarif: 2, note: 4.6, avis: 142, statut: 'disponible', category: 'langues', badges: [], dispoLabel: '🟢 Disponible' },
+  { id: 17, nom: 'Isabelle Noël', metier: 'Facilitatrice Design Sprint', photo: 'https://i.pravatar.cc/150?img=83', tarif: 4, note: 4.9, avis: 119, statut: 'planning', category: 'creation', badges: ['verifie'], dispoLabel: '📅 Planifiable' },
+  { id: 18, nom: 'Marc Delcourt', metier: 'Coach freelance', photo: 'https://i.pravatar.cc/150?img=85', tarif: 3, note: 4.7, avis: 136, statut: 'disponible', category: 'business', badges: [], dispoLabel: '🟢 Disponible' },
+  { id: 19, nom: 'Priya Patel', metier: 'Consultante Data Gouvernance', photo: 'https://i.pravatar.cc/150?img=88', tarif: 6, note: 4.9, avis: 67, statut: 'planning', category: 'finance', badges: ['verifie'], dispoLabel: '📅 Planifiable' },
+  { id: 20, nom: 'Alexandre Moreau', metier: 'Coach produit', photo: 'https://i.pravatar.cc/150?img=90', tarif: 4, note: 4.8, avis: 121, statut: 'disponible', category: 'business', badges: ['verifie'], dispoLabel: '🟢 Disponible' },
 ];
 
 const testimonials = [
-  { quote: "J'ai trouvé un coach en 2 minutes, appel instantané. Hyper efficace !", author: 'Marc D., Entrepreneur', rating: 5 },
-  { quote: 'Tarifs clairs, disponibilité en direct, parfait pour résoudre un blocage technique.', author: 'Leïla K., CTO', rating: 5 },
-  { quote: 'Les avis sont fiables et le paiement à la minute rassure pour tester.', author: 'Hassan B., Growth lead', rating: 4.8 },
+  { quote: "J'ai trouvé un coach en 2 minutes, appel instantané. Hyper efficace !", author: 'Marc D., Entrepreneur' },
+  { quote: 'Tarifs clairs, disponibilité en direct, parfait pour résoudre un blocage technique.', author: 'Leïla K., CTO' },
+  { quote: "Les avis sont fiables et le paiement à la minute rassure pour tester.", author: 'Hassan B., Growth lead' },
 ];
 
-const categoriesContainer = document.getElementById('category-grid');
-const availableRow = document.getElementById('available-row');
-const filterCategories = document.getElementById('filter-categories');
-const searchResults = document.getElementById('search-results');
-const pagination = document.getElementById('pagination');
-const ratingRange = document.getElementById('rating-range');
-const ratingValue = document.getElementById('rating-value');
-const testimonialCard = document.getElementById('testimonial-card');
-const testimonialDots = document.getElementById('testimonial-dots');
-const apiBase = window.API_BASE || 'http://localhost:4000';
+const expertTestimonials = [
+  { quote: 'Je gagne 1500€/mois en complément de mon activité de coach', author: 'Sophie M.' },
+  { quote: "Nexbuzzer m'a permis de monétiser mes conseils entre deux missions", author: 'Thomas D., Dev' },
+  { quote: 'Interface simple, paiements rapides, je recommande', author: 'Claire R., Consultante' },
+];
 
-let currentTestimonial = 0;
-let currentPage = 1;
-const perPage = 9;
+const steps = [
+  { icon: '🧭', title: 'Trouvez votre expert', desc: 'Parcourez les profils et filtrez par expertise, tarif ou langue.' },
+  { icon: '📞', title: 'Appelez instantanément', desc: "Si l'expert est disponible, démarrez l'appel en 1 clic ou planifiez." },
+  { icon: '💳', title: 'Payez à la minute', desc: 'Tarif transparent, remboursement automatique des minutes non utilisées.' },
+];
 
-function updateRangeBackground(value = ratingRange.value) {
-  const max = parseFloat(ratingRange.max) || 5;
-  const percentage = Math.min(100, Math.max(0, (value / max) * 100));
-  ratingRange.style.background = `linear-gradient(to right, var(--primary-500) 0%, var(--primary-500) ${percentage}%, var(--gray-200) ${percentage}%, var(--gray-200) 100%)`;
+const reasons = [
+  { icon: '💰', title: 'Paiement à la minute', desc: 'Ultra flexible, pas de forfait rigide' },
+  { icon: '⚡', title: 'Instantané', desc: 'Appels directs si l\'expert est disponible' },
+  { icon: '🔒', title: 'Sécurisé', desc: 'Paiements Stripe, données chiffrées' },
+  { icon: '✅', title: 'Experts vérifiés', desc: 'Badges, certifications, avis clients' },
+];
+
+const faq = [
+  'Comment fonctionne le paiement à la minute ?',
+  "Que se passe-t-il si l'expert ne répond pas ?",
+  'Puis-je annuler un appel ?',
+  'Les experts sont-ils vérifiés ?',
+  'Puis-je obtenir un remboursement ?',
+  'Comment planifier un appel ?',
+  'Quels moyens de paiement acceptez-vous ?',
+  "Y a-t-il des frais cachés ?",
+];
+
+const pricingFaq = [
+  'Puis-je changer mon tarif ?',
+  'Quand suis-je payé ?',
+  'Y a-t-il des frais supplémentaires ?',
+  'Que se passe-t-il si le client ne paie pas ?',
+  'Comment fonctionne le remboursement automatique ?',
+];
+
+function qs(selector) {
+  return document.querySelector(selector);
+}
+
+function renderSteps() {
+  const container = document.getElementById('steps-grid');
+  if (!container) return;
+  container.innerHTML = steps
+    .map((step, i) => `<article class="info-card"><span class="icon">${step.icon}</span><h4>${i + 1}. ${step.title}</h4><p class="muted">${step.desc}</p></article>`)
+    .join('');
 }
 
 function renderCategories() {
-  categoriesContainer.innerHTML = categories
+  const grid = document.getElementById('categories-grid');
+  if (!grid) return;
+  grid.innerHTML = categories
     .map(
-      (cat) => `<article class="expert-card" aria-label="${cat.nom}"><p class="icon">${cat.icon}</p><h4>${cat.nom}</h4><p class="muted">${cat.count} experts</p></article>`
-    )
-    .join('');
-
-  filterCategories.innerHTML = categories
-    .map(
-      (cat) =>
-        `<label class="filter-checkbox"><input type="checkbox" name="category" value="${cat.slug}" /><span class="checkmark"></span><span class="label-text">${cat.nom}</span><span class="count">(${cat.count})</span></label>`
+      (cat) => `<article class="info-card"><p class="icon">${cat.icon}</p><h4>${cat.nom}</h4><p class="muted">${cat.count} experts</p></article>`
     )
     .join('');
 }
 
 function renderAvailable() {
-  const available = experts.filter((e) => e.statut === 'disponible');
-  availableRow.innerHTML = available
+  const grid = document.getElementById('available-grid');
+  if (!grid) return;
+  grid.innerHTML = experts
+    .filter((e) => e.statut === 'disponible')
+    .slice(0, 3)
+    .map(renderExpertCard)
+    .join('');
+}
+
+function renderReasons() {
+  const grid = document.getElementById('reasons-grid');
+  if (!grid) return;
+  grid.innerHTML = reasons
+    .map((reason) => `<article class="info-card"><span class="icon">${reason.icon}</span><h4>${reason.title}</h4><p class="muted">${reason.desc}</p></article>`)
+    .join('');
+}
+
+function renderTestimonial(id, dotsId, data) {
+  const container = document.getElementById(id);
+  const dots = document.getElementById(dotsId);
+  if (!container || !dots) return;
+  let current = 0;
+  function update() {
+    const item = data[current];
+    container.innerHTML = `<p><em>“${item.quote}”</em></p><p class="muted">${item.author}</p>`;
+    dots.innerHTML = data
+      .map((_, i) => `<button class="${i === current ? 'active' : ''}" aria-label="Témoignage ${i + 1}"></button>`)
+      .join('');
+    dots.querySelectorAll('button').forEach((btn, index) => btn.addEventListener('click', () => { current = index; update(); }));
+  }
+  update();
+}
+
+function renderAccordion(id, questions) {
+  const container = document.getElementById(id);
+  if (!container) return;
+  container.innerHTML = questions
+    .map((q) => `<details><summary>${q}</summary><p class="muted">Réponse courte : tout est prévu pour que ce soit simple et sécurisé.</p></details>`)
+    .join('');
+}
+
+function renderClientSteps() {
+  const container = document.getElementById('client-steps');
+  if (!container) return;
+  const data = [
+    { icon: '🔍', title: 'Trouvez votre expert', desc: 'Filtrez par catégorie, tarif ou disponibilité. Consultez les avis.' },
+    { icon: '📹', title: 'Appelez instantanément', desc: 'Si dispo, lancez l’appel en 1 clic. Sinon planifiez le créneau idéal.' },
+    { icon: '💳', title: 'Payez à la minute', desc: 'Facturation au réel avec remboursement automatique du surplus.' },
+  ];
+  container.innerHTML = data
+    .map((step, idx) => `<article class="info-card"><span class="icon">${step.icon}</span><h4>${idx + 1}. ${step.title}</h4><p class="muted">${step.desc}</p></article>`)
+    .join('');
+}
+
+function renderExpertSteps() {
+  const container = document.getElementById('expert-steps');
+  if (!container) return;
+  const data = [
+    { icon: '🧑‍💻', title: 'Créez votre profil', desc: 'Bio, tarif, expertises et vidéo en 5 minutes.' },
+    { icon: '⏱️', title: 'Définissez votre disponibilité', desc: "Synchronisez votre calendrier ou activez 'Disponible maintenant'." },
+    { icon: '💸', title: 'Recevez vos paiements', desc: '85% de vos revenus chaque semaine via Stripe.' },
+  ];
+  container.innerHTML = data
+    .map((step, idx) => `<article class="info-card"><span class="icon">${step.icon}</span><h4>${idx + 1}. ${step.title}</h4><p class="muted">${step.desc}</p></article>`)
+    .join('');
+}
+
+function renderExpertBenefits() {
+  const container = document.getElementById('expert-benefits');
+  if (!container) return;
+  const data = [
+    { icon: '💰', title: 'Commission 15% seulement', desc: 'Vous gardez 85% de vos revenus. Aucun abonnement.' },
+    { icon: '⚡', title: 'Appels instantanés', desc: 'Activez “Disponible” et monétisez vos temps morts.' },
+    { icon: '🔒', title: 'Paiements sécurisés', desc: 'Virements hebdomadaires via Stripe Connect.' },
+  ];
+  container.innerHTML = data
+    .map((item) => `<article class="info-card"><span class="icon">${item.icon}</span><h4>${item.title}</h4><p class="muted">${item.desc}</p></article>`)
+    .join('');
+}
+
+function renderTimeline() {
+  const container = document.getElementById('expert-timeline');
+  if (!container) return;
+  const steps = [
+    'Créez votre profil (5 min) - Ajoutez photo, bio, tarif, vidéo',
+    'Définissez votre tarif (2-10€/min) - Libre de le modifier à tout moment',
+    'Activez “Disponible” - Les clients vous voient en temps réel',
+    'Recevez des appels - Gagnez de l’argent immédiatement',
+  ];
+  container.innerHTML = steps.map((s, i) => `<li><strong>${i + 1}.</strong> ${s}</li>`).join('');
+}
+
+function renderFilters() {
+  const container = document.getElementById('filter-categories');
+  if (!container) return;
+  container.innerHTML = categories
     .map(
-      (exp) => `<article class="expert-card">
-        <div class="relative">
-          <img class="expert-photo" src="${exp.photo}" alt="${exp.nom}" loading="lazy" decoding="async" />
-          <div class="badge-available-overlay">🟢 Dispo</div>
-        </div>
-        <h3 class="expert-title">${exp.nom}</h3>
-        <p class="expert-meta">${exp.metier}</p>
-        <div class="expert-rating"><span class="text-yellow-400">⭐⭐⭐⭐⭐</span><span class="font-semibold">${exp.note}</span><span class="muted">(${exp.avis})</span></div>
-        <div class="expert-pricing"><span class="amount">${exp.tarif}€</span><span class="muted">/min</span></div>
-        <div class="expert-buttons">
-          <button class="primary">📞 Appeler</button>
-          <button class="ghost">Voir profil</button>
-        </div>
-      </article>`
+      (cat) => `<label class="filter-checkbox"><input type="checkbox" value="${cat.slug}" /><span class="checkmark"></span><span class="label-text">${cat.nom}</span></label>`
     )
     .join('');
+}
+
+let currentPage = 1;
+const perPage = 9;
+
+function renderExpertCard(exp) {
+  return `<article class="expert-card">
+    <div class="relative">
+      <img class="expert-photo" src="${exp.photo}" alt="${exp.nom}" loading="lazy" />
+      <div class="badge-available-overlay">${exp.dispoLabel}</div>
+    </div>
+    <h3 class="expert-title">${exp.nom}</h3>
+    <p class="expert-meta">${exp.metier}</p>
+    <div class="expert-rating"><span>⭐⭐⭐⭐⭐</span><span class="font-semibold">${exp.note.toFixed(1)}</span><span class="muted">(${exp.avis} avis)</span></div>
+    <div class="expert-pricing"><span class="amount">${exp.tarif}€</span> <span class="muted">/min</span></div>
+    <div class="expert-buttons">
+      <button class="primary">📞 Appeler maintenant</button>
+      <button class="ghost">Voir profil</button>
+    </div>
+  </article>`;
 }
 
 function filterExperts() {
-  const searchTerm = document.getElementById('search-input').value.toLowerCase();
-  const selectedPrice = document.querySelector('input[name="price"]:checked').value;
-  const selectedCategories = Array.from(document.querySelectorAll('input[name="category"]:checked')).map((c) => c.value);
-  const selectedAvailability = Array.from(document.querySelectorAll('input[name="availability"]:checked')).map((c) => c.value);
-  const minRating = parseFloat(ratingRange.value);
+  const term = (qs('#search-input')?.value || '').toLowerCase();
+  const maxPrice = parseFloat(qs('#price-range')?.value || '10');
+  const minRating = parseFloat(qs('#rating-range')?.value || '0');
+  const availability = Array.from(document.querySelectorAll('.sidebar input[type="checkbox"]:checked')).map((i) => i.value);
+  const cats = Array.from(document.querySelectorAll('#filter-categories input:checked')).map((c) => c.value);
+  const badges = Array.from(document.querySelectorAll('.filter-group input[value="verifie"], .filter-group input[value="top"], .filter-group input[value="certifie"]')).filter((i) => i.checked).map((i) => i.value);
 
   return experts
-    .filter((exp) =>
-      !searchTerm ||
-      exp.nom.toLowerCase().includes(searchTerm) ||
-      exp.metier.toLowerCase().includes(searchTerm) ||
-      exp.specialites.some((s) => s.toLowerCase().includes(searchTerm))
-    )
-    .filter((exp) => {
-      if (selectedCategories.length === 0) return true;
-      return selectedCategories.some((cat) =>
-        categoryKeywords[cat]?.some((keyword) =>
-          `${exp.metier} ${exp.specialites.join(' ')}`.toLowerCase().includes(keyword)
-        )
-      );
-    })
-    .filter((exp) => {
-      if (selectedAvailability.length === 0) return true;
-      return selectedAvailability.includes(exp.statut);
-    })
+    .filter((exp) => exp.nom.toLowerCase().includes(term) || exp.metier.toLowerCase().includes(term))
+    .filter((exp) => exp.tarif <= maxPrice)
     .filter((exp) => exp.note >= minRating)
-    .filter((exp) => {
-      if (selectedPrice === 'all') return true;
-      const [min, max] = selectedPrice.split('-').map(Number);
-      return exp.tarif >= min && exp.tarif <= max;
-    });
+    .filter((exp) => (availability.length ? availability.includes(exp.statut === 'disponible' ? 'disponible' : 'planning') : true))
+    .filter((exp) => (cats.length ? cats.includes(exp.category) : true))
+    .filter((exp) => (badges.length ? badges.every((b) => exp.badges.includes(b)) : true));
 }
 
-function renderPagination(total) {
-  const pages = Math.ceil(total / perPage);
-  pagination.innerHTML = '';
-  for (let i = 1; i <= pages; i++) {
-    const btn = document.createElement('button');
-    btn.textContent = i;
-    btn.classList.toggle('active', i === currentPage);
-    btn.addEventListener('click', () => {
-      currentPage = i;
-      renderSearch();
-    });
-    pagination.appendChild(btn);
-  }
+function sortExperts(list) {
+  const sort = qs('#sort-select')?.value;
+  if (sort === 'note') return list.sort((a, b) => b.note - a.note);
+  if (sort === 'prix-asc') return list.sort((a, b) => a.tarif - b.tarif);
+  if (sort === 'prix-desc') return list.sort((a, b) => b.tarif - a.tarif);
+  if (sort === 'dispo') return list.sort((a, b) => (a.statut === 'disponible' ? -1 : 1) - (b.statut === 'disponible' ? -1 : 1));
+  return list;
 }
 
-function renderSearch(sort = document.getElementById('sort-select').value) {
-  const filtered = filterExperts();
-  const sorted = [...filtered].sort((a, b) => {
-    switch (sort) {
-      case 'note':
-        return b.note - a.note;
-      case 'prix':
-        return a.tarif - b.tarif;
-      case 'disponibilite':
-        return a.statut === 'disponible' ? -1 : 1;
-      default:
-        return b.avis - a.avis;
-    }
-  });
-
-  renderPagination(sorted.length);
-  const start = (currentPage - 1) * perPage;
-  const pageItems = sorted.slice(start, start + perPage);
-
-  if (!pageItems.length) {
-    searchResults.innerHTML = '<div class="empty-state">Aucun expert ne correspond à ces filtres pour le moment. Essayez d\'élargir votre recherche.</div>';
-    pagination.innerHTML = '';
-    return;
-  }
-
-  searchResults.innerHTML = pageItems
-    .map(
-      (exp) => `<article class="expert-card">
-        <div class="relative">
-          <img class="expert-photo" src="${exp.photo}" alt="${exp.nom}" loading="lazy" decoding="async" />
-          <div class="badge-available-overlay">${exp.statut === 'disponible' ? '🟢 Dispo' : '📅 Planifiable'}</div>
-        </div>
-        <h3 class="expert-title">${exp.nom}</h3>
-        <p class="expert-meta">${exp.metier}</p>
-        <div class="expert-rating"><span class="text-yellow-400">⭐⭐⭐⭐⭐</span><span class="font-semibold">${exp.note}</span><span class="muted">(${exp.avis})</span></div>
-        <div class="expert-pricing"><span class="amount">${exp.tarif}€</span><span class="muted">/min</span></div>
-        <div class="expert-buttons">
-          <button class="primary">📞 Appeler</button>
-          <button class="ghost">Voir profil</button>
-        </div>
-      </article>`
-    )
+function renderExpertsPage() {
+  const grid = document.getElementById('experts-grid');
+  if (!grid) return;
+  const filtered = sortExperts(filterExperts());
+  const pages = Math.ceil(filtered.length / perPage);
+  currentPage = Math.min(currentPage, pages || 1);
+  const items = filtered.slice((currentPage - 1) * perPage, currentPage * perPage);
+  grid.innerHTML = items.map(renderExpertCard).join('') || '<p class="muted">Aucun expert pour ces filtres.</p>';
+  const pagination = document.getElementById('pagination');
+  pagination.innerHTML = Array.from({ length: pages }, (_, i) => i + 1)
+    .map((p) => `<button class="${p === currentPage ? 'active' : ''}" data-page="${p}">${p}</button>`)
     .join('');
+  pagination.querySelectorAll('button').forEach((btn) => btn.addEventListener('click', () => { currentPage = Number(btn.dataset.page); renderExpertsPage(); }));
 }
 
-function renderProfile() {
-  const expert = experts[0];
-  document.getElementById('profile-photo').src = expert.photo;
-  document.getElementById('profile-photo').loading = 'lazy';
-  document.getElementById('profile-photo').decoding = 'async';
-  document.getElementById('profile-name').textContent = expert.nom;
-  document.getElementById('profile-role').textContent = expert.metier;
-  document.getElementById('profile-location').textContent = `${expert.ville} · ${expert.langue}`;
-  document.getElementById('profile-rating').textContent = `⭐ ${expert.note}/5 (${expert.avis} avis)`;
-
-  document.getElementById('about').innerHTML = `
-    <p>${expert.bio}</p>
-    <div class="badge-row">${expert.badges.map((b) => `<span class="badge">${b}</span>`).join('')}</div>
-    <ul class="dashboard-list">
-      <li>245 appels réalisés</li>
-      <li>Temps de réponse : &lt; 2 min</li>
-      <li>Taux de satisfaction : 98%</li>
-    </ul>
-  `;
-
-  document.getElementById('expertises').innerHTML = expert.specialites
-    .map((item) => `<div class="badge">${item}</div>`)
-    .join('');
-
-  document.getElementById('reviews').innerHTML = `
-    <article class="card"><p>⭐⭐⭐⭐⭐ Marc D. · Il y a 2 jours</p><p>Excellent coach, très à l'écoute. Appel productif !</p></article>
-    <article class="card"><p>⭐⭐⭐⭐⭐ Julie P. · Il y a 5 jours</p><p>Conseils précis et actionnables, je recommande.</p></article>
-  `;
-
-  document.getElementById('availability').innerHTML = `
-    <p>Créneaux ouverts aujourd'hui : 12h-14h, 18h-20h</p>
-    <p>Réservation possible jusqu'à 30 jours.</p>
-  `;
-}
-
-function renderTestimonials() {
-  const testimonial = testimonials[currentTestimonial];
-  testimonialCard.innerHTML = `
-    <p><em>"${testimonial.quote}"</em></p>
-    <p class="rating">${'⭐'.repeat(Math.round(testimonial.rating))} ${testimonial.rating}/5</p>
-    <p class="muted">${testimonial.author}</p>
-  `;
-
-  testimonialDots.innerHTML = testimonials
-    .map((_, index) => `<button aria-label="Témoignage ${index + 1}" class="${index === currentTestimonial ? 'active' : ''}"></button>`)
-    .join('');
-
-  testimonialDots.querySelectorAll('button').forEach((btn, index) =>
-    btn.addEventListener('click', () => {
-      currentTestimonial = index;
-      renderTestimonials();
-    })
-  );
-}
-
-function cycleTestimonials() {
-  currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-  renderTestimonials();
-}
-
-function showFormMessage(element, type, text) {
-  if (!element) return;
-  element.textContent = text;
-  element.className = `form-message ${type}`;
-  element.hidden = false;
-}
-
-async function submitAuth(endpoint, payload) {
-  const response = await fetch(`${apiBase}${endpoint}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  });
-
-  const data = await response.json();
-  if (!response.ok) {
-    throw new Error(data.error || data.message || 'Une erreur est survenue');
-  }
-  return data;
-}
-
-function attachAuthHandlers() {
-  const loginForm = document.getElementById('login-form');
-  const signupForm = document.getElementById('signup-form');
-
-  if (loginForm) {
-    loginForm.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const messageEl = document.getElementById('login-message');
-      messageEl.hidden = true;
-      const formData = new FormData(loginForm);
-      try {
-        const payload = {
-          email: formData.get('email'),
-          password: formData.get('password'),
-        };
-        const data = await submitAuth('/auth/login', payload);
-        localStorage.setItem('sessionToken', data.token);
-        showFormMessage(
-          messageEl,
-          'success',
-          `Connexion réussie pour ${data.user.email}. Token stocké localement.`
-        );
-      } catch (error) {
-        showFormMessage(messageEl, 'error', error.message);
-      }
-    });
-  }
-
-  if (signupForm) {
-    signupForm.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const messageEl = document.getElementById('signup-message');
-      messageEl.hidden = true;
-      const formData = new FormData(signupForm);
-      try {
-        const payload = {
-          email: formData.get('email'),
-          password: formData.get('password'),
-          fullName: formData.get('fullName'),
-          role: formData.get('role'),
-        };
-        await submitAuth('/auth/signup', payload);
-        showFormMessage(messageEl, 'success', 'Compte créé avec succès. Vous pouvez vous connecter.');
-        signupForm.reset();
-      } catch (error) {
-        showFormMessage(messageEl, 'error', error.message);
-      }
-    });
-  }
-}
-
-function attachFilterListeners() {
-  const resetAndRender = () => {
-    currentPage = 1;
-    renderSearch();
+function calculator() {
+  const result = document.getElementById('calculator-result');
+  if (!result) return;
+  const calls = document.getElementById('calls-range');
+  const duration = document.getElementById('duration-range');
+  const rate = document.getElementById('rate-range');
+  const update = () => {
+    const callsVal = Number(calls.value);
+    const durationVal = Number(duration.value);
+    const rateVal = Number(rate.value);
+    document.getElementById('calls-value').textContent = callsVal;
+    document.getElementById('duration-value').textContent = durationVal;
+    document.getElementById('rate-value').textContent = `${rateVal}€`;
+    const monthly = callsVal * durationVal * rateVal * 4 * 0.85;
+    result.innerHTML = `<h3>💰 Revenus estimés : ${Math.round(monthly)}€/mois</h3><p class="muted">${callsVal} appels × ${durationVal} min × ${rateVal}€ × 4 semaines × 0.85</p>`;
   };
+  update();
+  [calls, duration, rate].forEach((input) => input?.addEventListener('input', update));
+}
 
-  document.querySelectorAll('input[name="category"], input[name="availability"], input[name="price"]').forEach((input) => {
-    input.addEventListener('change', resetAndRender);
-  });
-
-  const searchInput = document.getElementById('search-input');
-  searchInput.addEventListener('input', resetAndRender);
-  searchInput.addEventListener('keyup', (event) => {
-    if (event.key === 'Enter') {
-      resetAndRender();
-    }
-  });
-
-  const heroSearch = document.getElementById('hero-search');
-  heroSearch.addEventListener('keyup', (event) => {
-    if (event.key === 'Enter') {
-      document.getElementById('hero-submit').click();
-    }
+function bindControls() {
+  const price = qs('#price-range');
+  if (price) price.addEventListener('input', (e) => { qs('#price-value').textContent = e.target.value; renderExpertsPage(); });
+  const rating = qs('#rating-range');
+  if (rating) rating.addEventListener('input', (e) => { qs('#rating-value').textContent = e.target.value; renderExpertsPage(); });
+  document.querySelectorAll('.sidebar input').forEach((input) => input.addEventListener('change', renderExpertsPage));
+  const search = qs('#search-input');
+  search?.addEventListener('input', renderExpertsPage);
+  const sort = qs('#sort-select');
+  sort?.addEventListener('change', renderExpertsPage);
+  const clear = qs('#clear-filters');
+  clear?.addEventListener('click', () => {
+    document.querySelectorAll('.sidebar input').forEach((input) => { if (input.type === 'checkbox' || input.type === 'radio') input.checked = input.defaultChecked; });
+    if (price) price.value = 10;
+    if (rating) rating.value = 0;
+    if (qs('#price-value')) qs('#price-value').textContent = '10€';
+    if (qs('#rating-value')) qs('#rating-value').textContent = '0';
+    renderExpertsPage();
   });
 }
 
-function attachEvents() {
-  document.querySelectorAll('.tab').forEach((tab) => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.tab').forEach((t) => t.classList.remove('active'));
-      document.querySelectorAll('.tab-panel').forEach((panel) => panel.classList.remove('visible'));
-      tab.classList.add('active');
-      document.getElementById(tab.dataset.target).classList.add('visible');
-    });
-  });
-
-  document.getElementById('search-button').addEventListener('click', () => {
-    currentPage = 1;
-    renderSearch();
-  });
-
-  document.getElementById('sort-select').addEventListener('change', (e) => renderSearch(e.target.value));
-  document.getElementById('clear-filters').addEventListener('click', () => {
-    document.querySelector('input[name="price"][value="all"]').checked = true;
-    document.querySelectorAll('input[name="category"], input[name="availability"]').forEach((input) => (input.checked = false));
-    ratingRange.value = 0;
-    ratingValue.textContent = '0';
-    currentPage = 1;
-    renderSearch();
-  });
-
-  ratingRange.addEventListener('input', (e) => {
-    ratingValue.textContent = e.target.value;
-    updateRangeBackground(e.target.value);
-    currentPage = 1;
-    renderSearch();
-  });
-
-  document.getElementById('hero-submit').addEventListener('click', () => {
-    document.getElementById('search-input').value = document.getElementById('hero-search').value;
-    currentPage = 1;
-    renderSearch();
-    document.getElementById('search').scrollIntoView({ behavior: 'smooth' });
-  });
-
-  attachAuthHandlers();
-  attachFilterListeners();
+function mobileMenu() {
+  const burger = document.querySelector('.burger');
+  const menu = document.getElementById('mobile-menu');
+  burger?.addEventListener('click', () => menu?.classList.toggle('show'));
 }
 
+renderSteps();
 renderCategories();
 renderAvailable();
-renderProfile();
-renderTestimonials();
-renderSearch();
-attachEvents();
-updateRangeBackground();
-setInterval(cycleTestimonials, 5000);
+renderReasons();
+renderTestimonial('testimonial', 'testimonial-dots', testimonials);
+renderTestimonial('expert-testimonial', 'expert-testimonial-dots', expertTestimonials);
+renderAccordion('faq', faq);
+renderAccordion('pricing-faq', pricingFaq);
+renderClientSteps();
+renderExpertSteps();
+renderExpertBenefits();
+renderTimeline();
+renderFilters();
+renderExpertsPage();
+calculator();
+bindControls();
+mobileMenu();
