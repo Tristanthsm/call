@@ -175,7 +175,10 @@ function renderExpertBenefits() {
     { icon: '🔒', title: 'Paiements sécurisés', desc: 'Virements hebdomadaires via Stripe Connect.' },
   ];
   container.innerHTML = data
-    .map((item) => `<article class="info-card"><span class="icon">${item.icon}</span><h4>${item.title}</h4><p class="muted">${item.desc}</p></article>`)
+    .map(
+      (item) =>
+        `<article class="advantage-card"><div class="icon-wrapper bg-primary-100"><span class="icon">${item.icon}</span></div><h4>${item.title}</h4><p class="muted">${item.desc}</p></article>`
+    )
     .join('');
 }
 
@@ -205,18 +208,36 @@ let currentPage = 1;
 const perPage = 9;
 
 function renderExpertCard(exp) {
-  return `<article class="expert-card">
-    <div class="relative">
-      <img class="expert-photo" src="${exp.photo}" alt="${exp.nom}" loading="lazy" />
-      <div class="badge-available-overlay">${exp.dispoLabel}</div>
+  return `<article class="expert-card group">
+    <div class="relative mb-6">
+      <img src="${exp.photo}" alt="${exp.nom}" class="w-32 h-32 rounded-full mx-auto ring-4 ring-white shadow-lg expert-photo" />
+      <div class="badge-available">
+        <span class="status-dot"></span> ${exp.dispoLabel.includes('Disponible') ? 'Disponible' : exp.dispoLabel}
+      </div>
     </div>
-    <h3 class="expert-title">${exp.nom}</h3>
-    <p class="expert-meta">${exp.metier}</p>
-    <div class="expert-rating"><span>⭐⭐⭐⭐⭐</span><span class="font-semibold">${exp.note.toFixed(1)}</span><span class="muted">(${exp.avis} avis)</span></div>
-    <div class="expert-pricing"><span class="amount">${exp.tarif}€</span> <span class="muted">/min</span></div>
-    <div class="expert-buttons">
-      <button class="primary">📞 Appeler maintenant</button>
-      <button class="ghost">Voir profil</button>
+    <div class="text-center mb-4">
+      <h3 class="text-xl font-bold text-gray-900 mb-1">${exp.nom}</h3>
+      <p class="text-sm text-gray-600 leading-relaxed min-h-[40px]">${exp.metier}</p>
+    </div>
+    <div class="flex items-center justify-center gap-2 mb-4 expert-rating-row">
+      <div class="flex text-lg">⭐⭐⭐⭐⭐</div>
+      <span class="text-base font-semibold text-gray-900">${exp.note.toFixed(1)}</span>
+      <span class="text-sm text-gray-500">(${exp.avis})</span>
+    </div>
+    <div class="mb-6 text-center">
+      <div class="flex items-baseline justify-center gap-1">
+        <span class="text-5xl font-bold text-gray-900">${exp.tarif}€</span>
+        <span class="text-xl text-gray-600 font-medium">/min</span>
+      </div>
+    </div>
+    <div class="space-y-3 expert-buttons">
+      <button class="btn-primary-expert w-full">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+        </svg>
+        Appeler maintenant
+      </button>
+      <button class="btn-secondary-expert w-full">Voir profil</button>
     </div>
   </article>`;
 }
@@ -225,9 +246,9 @@ function filterExperts() {
   const term = (qs('#search-input')?.value || '').toLowerCase();
   const maxPrice = parseFloat(qs('#price-range')?.value || '10');
   const minRating = parseFloat(qs('#rating-range')?.value || '0');
-  const availability = Array.from(document.querySelectorAll('.sidebar input[type="checkbox"]:checked')).map((i) => i.value);
-  const cats = Array.from(document.querySelectorAll('#filter-categories input:checked')).map((c) => c.value);
-  const badges = Array.from(document.querySelectorAll('.filter-group input[value="verifie"], .filter-group input[value="top"], .filter-group input[value="certifie"]')).filter((i) => i.checked).map((i) => i.value);
+  const availability = Array.from(document.querySelectorAll('.filters-sidebar input[type="checkbox"]:checked')).map((i) => i.value);
+  const cats = Array.from(document.querySelectorAll('.filter-list input[type="checkbox"]:checked')).map((c) => c.value);
+  const badges = Array.from(document.querySelectorAll('.filter-list input[value="verifie"], .filter-list input[value="top"], .filter-list input[value="certifie"]')).filter((i) => i.checked).map((i) => i.value);
 
   return experts
     .filter((exp) => exp.nom.toLowerCase().includes(term) || exp.metier.toLowerCase().includes(term))
@@ -287,14 +308,14 @@ function bindControls() {
   if (price) price.addEventListener('input', (e) => { qs('#price-value').textContent = e.target.value; renderExpertsPage(); });
   const rating = qs('#rating-range');
   if (rating) rating.addEventListener('input', (e) => { qs('#rating-value').textContent = e.target.value; renderExpertsPage(); });
-  document.querySelectorAll('.sidebar input').forEach((input) => input.addEventListener('change', renderExpertsPage));
+  document.querySelectorAll('.filters-sidebar input').forEach((input) => input.addEventListener('change', renderExpertsPage));
   const search = qs('#search-input');
   search?.addEventListener('input', renderExpertsPage);
   const sort = qs('#sort-select');
   sort?.addEventListener('change', renderExpertsPage);
   const clear = qs('#clear-filters');
   clear?.addEventListener('click', () => {
-    document.querySelectorAll('.sidebar input').forEach((input) => { if (input.type === 'checkbox' || input.type === 'radio') input.checked = input.defaultChecked; });
+    document.querySelectorAll('.filters-sidebar input').forEach((input) => { if (input.type === 'checkbox' || input.type === 'radio') input.checked = input.defaultChecked; });
     if (price) price.value = 10;
     if (rating) rating.value = 0;
     if (qs('#price-value')) qs('#price-value').textContent = '10€';

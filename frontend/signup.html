@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create an account | Nexbuzzer</title>
+    <title>Créer un compte | Nexbuzzer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,95 +12,130 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="auth-modern-body">
-    <main class="auth-modern">
-      <div class="auth-card">
-        <header class="auth-card__header">
-          <svg class="auth-logo" fill="currentColor" height="48" viewBox="0 0 40 48" width="40" aria-hidden="true">
-            <clipPath id="logoClip">
-              <path d="m0 0h40v48h-40z" />
-            </clipPath>
-            <g clip-path="url(#logoClip)">
-              <path d="m25.0887 5.05386-3.933-1.05386-3.3145 12.3696-2.9923-11.16736-3.9331 1.05386 3.233 12.0655-8.05262-8.0526-2.87919 2.8792 8.83271 8.8328-10.99975-2.9474-1.05385625 3.933 12.01860625 3.2204c-.1376-.5935-.2104-1.2119-.2104-1.8473 0-4.4976 3.646-8.1436 8.1437-8.1436 4.4976 0 8.1436 3.646 8.1436 8.1436 0 .6313-.0719 1.2459-.2078 1.8359l10.9227 2.9267 1.0538-3.933-12.0664-3.2332 11.0005-2.9476-1.0539-3.933-12.0659 3.233 8.0526-8.0526-2.8792-2.87916-8.7102 8.71026z" />
-              <path d="m27.8723 26.2214c-.3372 1.4256-1.0491 2.7063-2.0259 3.7324l7.913 7.9131 2.8792-2.8792z" />
-              <path d="m25.7665 30.0366c-.9886 1.0097-2.2379 1.7632-3.6389 2.1515l2.8794 10.746 3.933-1.0539z" />
-              <path d="m21.9807 32.2274c-.65.1671-1.3313.2559-2.0334.2559-.7522 0-1.4806-.102-2.1721-.2929l-2.882 10.7558 3.933 1.0538z" />
-              <path d="m17.6361 32.1507c-1.3796-.4076-2.6067-1.1707-3.5751-2.1833l-7.9325 7.9325 2.87919 2.8792z" />
-              <path d="m13.9956 29.8973c-.9518-1.019-1.6451-2.2826-1.9751-3.6862l-10.95836 2.9363 1.05385 3.933z" />
-            </g>
-          </svg>
-          <div class="auth-card__title">
-            <h1>Create an account</h1>
-            <p>Welcome! Create an account to get started.</p>
-          </div>
-        </header>
-
-        <div class="auth-card__content">
-          <div class="field">
-            <label for="role">Role</label>
-            <div class="select-wrapper">
-              <select id="role" aria-label="Select role">
-                <option value="designer" selected>Product Designer</option>
-                <option value="developer">Developer</option>
-                <option value="manager">Product Manager</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field two-columns">
+  <body>
+    <div class="signup-hero">
+      <div class="signup-wrapper">
+        <div class="signup-logo">
+          <a href="/" class="brand">
+            <div class="logo">N</div>
             <div>
-              <label for="firstName">First name</label>
-              <input id="firstName" type="text" />
+              <div class="eyebrow">Appel Minute</div>
+              <span class="brand-name">Nexbuzzer</span>
             </div>
-            <div>
-              <label for="lastName">Last name</label>
-              <input id="lastName" type="text" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="username">Username</label>
-            <input id="username" type="text" />
-          </div>
-
-          <div class="field">
-            <label for="email">Email address</label>
-            <input id="email" type="email" />
-          </div>
-
-          <div class="field">
-            <label for="password">Password</label>
-            <div class="password-wrapper">
-              <input id="password" type="password" class="with-action" />
-              <button type="button" class="icon-button" data-toggle="password" aria-label="Toggle password">Show</button>
-            </div>
-          </div>
-
-          <label class="checkbox">
-            <input id="terms" type="checkbox" />
-            <span>I agree to the <a href="#">Terms</a> and <a href="#">Conditions</a></span>
-          </label>
-
-          <button class="primary wide" type="button">Create free account</button>
+          </a>
         </div>
 
-        <footer class="auth-card__footer">
-          <p>Already have an account? <a href="/login.html">Sign in</a></p>
-        </footer>
+        <div class="signup-card">
+          <div class="signup-card__header">
+            <h1>Créer un compte</h1>
+            <p>Choisissez votre type de compte pour commencer</p>
+          </div>
+
+          <div class="grid two signup-card__types">
+            <label class="account-type-card">
+              <input type="radio" name="accountType" value="client" class="sr-only" />
+              <div class="card-content">
+                <div class="icon-circle bg-primary-100">
+                  <svg class="w-8 h-8 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                  </svg>
+                </div>
+                <h3>Je cherche un expert</h3>
+                <p>Accédez à des milliers d'experts disponibles en temps réel</p>
+              </div>
+              <div class="checkmark">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
+                </svg>
+              </div>
+            </label>
+
+            <label class="account-type-card">
+              <input type="radio" name="accountType" value="expert" class="sr-only" />
+              <div class="card-content">
+                <div class="icon-circle bg-success-100">
+                  <svg class="w-8 h-8 text-success-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" />
+                    <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                  </svg>
+                </div>
+                <h3>Je suis un expert</h3>
+                <p>Monétisez votre expertise à la minute. Commission 15%</p>
+              </div>
+              <div class="checkmark">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
+                </svg>
+              </div>
+            </label>
+          </div>
+
+          <form class="signup-form">
+            <div class="grid two">
+              <div>
+                <label class="form-label">Prénom</label>
+                <input type="text" class="form-input" placeholder="Sophie" />
+              </div>
+              <div>
+                <label class="form-label">Nom</label>
+                <input type="text" class="form-input" placeholder="Martin" />
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">Adresse email</label>
+              <input type="email" class="form-input" placeholder="sophie@exemple.fr" />
+            </div>
+
+            <div>
+              <label class="form-label">Mot de passe</label>
+              <div class="relative">
+                <input type="password" class="form-input pr-12" placeholder="- - - - - - - - " />
+                <button type="button" class="password-toggle">Afficher</button>
+              </div>
+              <p class="text-xs text-gray-500 mt-2">Minimum 8 caractères avec majuscule, minuscule et chiffre</p>
+            </div>
+
+            <div class="signup-terms">
+              <input type="checkbox" id="terms" />
+              <label for="terms">
+                J'accepte les <a href="/cgu">Conditions Générales d'Utilisation</a> et la
+                <a href="/confidentialite">Politique de confidentialité</a>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-submit">Créer mon compte gratuitement</button>
+          </form>
+
+          <div class="signup-separator">
+            <span>OU</span>
+          </div>
+
+          <button class="btn-google">
+            <svg class="w-5 h-5" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+            </svg>
+            Continuer avec Google
+          </button>
+
+          <p class="signup-footer">
+            Vous avez déjà un compte ? <a href="/login.html">Se connecter</a>
+          </p>
+        </div>
       </div>
-    </main>
+    </div>
 
     <script>
-      const toggleButtons = document.querySelectorAll('[data-toggle="password"]');
-      toggleButtons.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const wrapper = btn.closest('.password-wrapper');
-          const input = wrapper?.querySelector('input');
-          if (!input) return;
-          const isText = input.type === 'text';
-          input.type = isText ? 'password' : 'text';
-          btn.textContent = isText ? 'Show' : 'Hide';
-        });
+      const toggle = document.querySelector('.password-toggle');
+      const passwordInput = document.querySelector('.form-input[type="password"]');
+      toggle?.addEventListener('click', () => {
+        if (!passwordInput) return;
+        const isText = passwordInput.type === 'text';
+        passwordInput.type = isText ? 'password' : 'text';
+        toggle.textContent = isText ? 'Afficher' : 'Masquer';
       });
     </script>
   </body>
