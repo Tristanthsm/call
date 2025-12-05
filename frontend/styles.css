@@ -72,6 +72,16 @@ a:hover {
   text-decoration: underline;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--primary-50);
+}
+
 button {
   font: inherit;
   border: none;
@@ -761,6 +771,15 @@ textarea {
 .pagination button.active {
   background: var(--primary-500);
   color: #fff;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 32px;
+  color: var(--gray-600);
+  border: 1px dashed var(--gray-200);
+  border-radius: var(--radius-card);
+  background: var(--gray-50);
 }
 
 /* Expert card */

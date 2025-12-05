@@ -64,6 +64,12 @@ let currentTestimonial = 0;
 let currentPage = 1;
 const perPage = 9;
 
+function updateRangeBackground(value = ratingRange.value) {
+  const max = parseFloat(ratingRange.max) || 5;
+  const percentage = Math.min(100, Math.max(0, (value / max) * 100));
+  ratingRange.style.background = `linear-gradient(to right, var(--primary-500) 0%, var(--primary-500) ${percentage}%, var(--gray-200) ${percentage}%, var(--gray-200) 100%)`;
+}
+
 function renderCategories() {
   categoriesContainer.innerHTML = categories
     .map(
@@ -85,7 +91,7 @@ function renderAvailable() {
     .map(
       (exp) => `<article class="expert-card">
         <div class="relative">
-          <img class="expert-photo" src="${exp.photo}" alt="${exp.nom}" />
+          <img class="expert-photo" src="${exp.photo}" alt="${exp.nom}" loading="lazy" decoding="async" />
           <div class="badge-available-overlay">🟢 Dispo</div>
         </div>
         <h3 class="expert-title">${exp.nom}</h3>
@@ -169,11 +175,17 @@ function renderSearch(sort = document.getElementById('sort-select').value) {
   const start = (currentPage - 1) * perPage;
   const pageItems = sorted.slice(start, start + perPage);
 
+  if (!pageItems.length) {
+    searchResults.innerHTML = '<div class="empty-state">Aucun expert ne correspond à ces filtres pour le moment. Essayez d\'élargir votre recherche.</div>';
+    pagination.innerHTML = '';
+    return;
+  }
+
   searchResults.innerHTML = pageItems
     .map(
       (exp) => `<article class="expert-card">
         <div class="relative">
-          <img class="expert-photo" src="${exp.photo}" alt="${exp.nom}" />
+          <img class="expert-photo" src="${exp.photo}" alt="${exp.nom}" loading="lazy" decoding="async" />
           <div class="badge-available-overlay">${exp.statut === 'disponible' ? '🟢 Dispo' : '📅 Planifiable'}</div>
         </div>
         <h3 class="expert-title">${exp.nom}</h3>
@@ -192,6 +204,8 @@ function renderSearch(sort = document.getElementById('sort-select').value) {
 function renderProfile() {
   const expert = experts[0];
   document.getElementById('profile-photo').src = expert.photo;
+  document.getElementById('profile-photo').loading = 'lazy';
+  document.getElementById('profile-photo').decoding = 'async';
   document.getElementById('profile-name').textContent = expert.nom;
   document.getElementById('profile-role').textContent = expert.metier;
   document.getElementById('profile-location').textContent = `${expert.ville} · ${expert.langue}`;
@@ -319,6 +333,32 @@ function attachAuthHandlers() {
   }
 }
 
+function attachFilterListeners() {
+  const resetAndRender = () => {
+    currentPage = 1;
+    renderSearch();
+  };
+
+  document.querySelectorAll('input[name="category"], input[name="availability"], input[name="price"]').forEach((input) => {
+    input.addEventListener('change', resetAndRender);
+  });
+
+  const searchInput = document.getElementById('search-input');
+  searchInput.addEventListener('input', resetAndRender);
+  searchInput.addEventListener('keyup', (event) => {
+    if (event.key === 'Enter') {
+      resetAndRender();
+    }
+  });
+
+  const heroSearch = document.getElementById('hero-search');
+  heroSearch.addEventListener('keyup', (event) => {
+    if (event.key === 'Enter') {
+      document.getElementById('hero-submit').click();
+    }
+  });
+}
+
 function attachEvents() {
   document.querySelectorAll('.tab').forEach((tab) => {
     tab.addEventListener('click', () => {
@@ -346,17 +386,20 @@ function attachEvents() {
 
   ratingRange.addEventListener('input', (e) => {
     ratingValue.textContent = e.target.value;
+    updateRangeBackground(e.target.value);
     currentPage = 1;
     renderSearch();
   });
 
   document.getElementById('hero-submit').addEventListener('click', () => {
     document.getElementById('search-input').value = document.getElementById('hero-search').value;
+    currentPage = 1;
     renderSearch();
     document.getElementById('search').scrollIntoView({ behavior: 'smooth' });
   });
 
   attachAuthHandlers();
+  attachFilterListeners();
 }
 
 renderCategories();
@@ -365,4 +408,5 @@ renderProfile();
 renderTestimonials();
 renderSearch();
 attachEvents();
+updateRangeBackground();
 setInterval(cycleTestimonials, 5000);
