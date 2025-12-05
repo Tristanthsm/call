@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inscription | Nexbuzzer</title>
+    <title>Create an account | Nexbuzzer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,113 +12,96 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="with-header">
-    <header class="topbar">
-      <div class="container topbar-content">
-        <a class="brand" href="/">
-          <div class="logo">N</div>
-          <div>
-            <div class="eyebrow">Appel Minute</div>
-            <span class="brand-name">Nexbuzzer</span>
+  <body class="auth-modern-body">
+    <main class="auth-modern">
+      <div class="auth-card">
+        <header class="auth-card__header">
+          <svg class="auth-logo" fill="currentColor" height="48" viewBox="0 0 40 48" width="40" aria-hidden="true">
+            <clipPath id="logoClip">
+              <path d="m0 0h40v48h-40z" />
+            </clipPath>
+            <g clip-path="url(#logoClip)">
+              <path d="m25.0887 5.05386-3.933-1.05386-3.3145 12.3696-2.9923-11.16736-3.9331 1.05386 3.233 12.0655-8.05262-8.0526-2.87919 2.8792 8.83271 8.8328-10.99975-2.9474-1.05385625 3.933 12.01860625 3.2204c-.1376-.5935-.2104-1.2119-.2104-1.8473 0-4.4976 3.646-8.1436 8.1437-8.1436 4.4976 0 8.1436 3.646 8.1436 8.1436 0 .6313-.0719 1.2459-.2078 1.8359l10.9227 2.9267 1.0538-3.933-12.0664-3.2332 11.0005-2.9476-1.0539-3.933-12.0659 3.233 8.0526-8.0526-2.8792-2.87916-8.7102 8.71026z" />
+              <path d="m27.8723 26.2214c-.3372 1.4256-1.0491 2.7063-2.0259 3.7324l7.913 7.9131 2.8792-2.8792z" />
+              <path d="m25.7665 30.0366c-.9886 1.0097-2.2379 1.7632-3.6389 2.1515l2.8794 10.746 3.933-1.0539z" />
+              <path d="m21.9807 32.2274c-.65.1671-1.3313.2559-2.0334.2559-.7522 0-1.4806-.102-2.1721-.2929l-2.882 10.7558 3.933 1.0538z" />
+              <path d="m17.6361 32.1507c-1.3796-.4076-2.6067-1.1707-3.5751-2.1833l-7.9325 7.9325 2.87919 2.8792z" />
+              <path d="m13.9956 29.8973c-.9518-1.019-1.6451-2.2826-1.9751-3.6862l-10.95836 2.9363 1.05385 3.933z" />
+            </g>
+          </svg>
+          <div class="auth-card__title">
+            <h1>Create an account</h1>
+            <p>Welcome! Create an account to get started.</p>
           </div>
-        </a>
-        <nav class="nav-links" aria-label="Navigation principale">
-          <a href="/experts.html">Trouver un expert</a>
-          <a href="/comment-ca-marche.html">Comment ça marche</a>
-          <a href="/devenir-expert.html">Devenir expert</a>
-          <a href="/tarifs.html">Tarifs</a>
-        </nav>
-        <div class="actions">
-          <a class="ghost" href="/login.html">Se connecter</a>
-          <a class="primary" href="/signup.html">S'inscrire</a>
-        </div>
-        <button class="burger" aria-label="Ouvrir le menu">☰</button>
-      </div>
-    </header>
+        </header>
 
-    <div class="mobile-menu" id="mobile-menu">
-      <a href="/experts.html">Trouver un expert</a>
-      <a href="/comment-ca-marche.html">Comment ça marche</a>
-      <a href="/devenir-expert.html">Devenir expert</a>
-      <a href="/tarifs.html">Tarifs</a>
-      <a href="/login.html">Se connecter</a>
-      <a class="primary" href="/signup.html">S'inscrire</a>
-    </div>
-
-    <main class="auth-page">
-      <div class="auth-box">
-        <h1>Créer un compte</h1>
-        <p class="muted">Choisissez votre type de compte</p>
-        <div class="account-type" id="account-type">
-          <label class="card-option active" data-type="client">
-            <input type="radio" name="type" value="client" checked />
-            <span class="icon">🔍</span>
-            <div>
-              <h3>Je cherche un expert</h3>
-              <p class="muted">Accédez à des milliers d'experts disponibles</p>
+        <div class="auth-card__content">
+          <div class="field">
+            <label for="role">Role</label>
+            <div class="select-wrapper">
+              <select id="role" aria-label="Select role">
+                <option value="designer" selected>Product Designer</option>
+                <option value="developer">Developer</option>
+                <option value="manager">Product Manager</option>
+              </select>
             </div>
-          </label>
-          <label class="card-option" data-type="expert">
-            <input type="radio" name="type" value="expert" />
-            <span class="icon">💼</span>
-            <div>
-              <h3>Je suis un expert</h3>
-              <p class="muted">Monétisez votre expertise à la minute</p>
-            </div>
-          </label>
-        </div>
-
-        <form class="auth-form" id="signup-form">
-          <div class="form-row">
-            <label>Prénom
-              <input type="text" required />
-            </label>
-            <label>Nom
-              <input type="text" required />
-            </label>
           </div>
-          <label>Email
-            <input type="email" required />
+
+          <div class="field two-columns">
+            <div>
+              <label for="firstName">First name</label>
+              <input id="firstName" type="text" />
+            </div>
+            <div>
+              <label for="lastName">Last name</label>
+              <input id="lastName" type="text" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="username">Username</label>
+            <input id="username" type="text" />
+          </div>
+
+          <div class="field">
+            <label for="email">Email address</label>
+            <input id="email" type="email" />
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="password-wrapper">
+              <input id="password" type="password" class="with-action" />
+              <button type="button" class="icon-button" data-toggle="password" aria-label="Toggle password">Show</button>
+            </div>
+          </div>
+
+          <label class="checkbox">
+            <input id="terms" type="checkbox" />
+            <span>I agree to the <a href="#">Terms</a> and <a href="#">Conditions</a></span>
           </label>
-          <label>Mot de passe
-            <input type="password" required />
-            <span class="muted">Force : sécurisée</span>
-          </label>
-          <label class="filter-checkbox">
-            <input type="checkbox" required />
-            <span class="checkmark"></span>
-            <span class="label-text">J'accepte les CGU et la politique de confidentialité</span>
-          </label>
-          <button class="primary wide" type="submit">Créer mon compte</button>
-        </form>
-        <div class="separator">— OU —</div>
-        <button class="ghost wide">S'inscrire avec Google</button>
-        <p class="muted center">Déjà un compte ? <a class="link" href="/login.html">Se connecter</a></p>
+
+          <button class="primary wide" type="button">Create free account</button>
+        </div>
+
+        <footer class="auth-card__footer">
+          <p>Already have an account? <a href="/login.html">Sign in</a></p>
+        </footer>
       </div>
     </main>
 
-    <footer class="footer">
-      <div class="container footer-grid">
-        <div>
-          <h4>Nexbuzzer</h4>
-          <p class="muted">Votre expertise, à la minute.</p>
-        </div>
-        <div>
-          <p class="footer-title">Plateforme</p>
-          <a href="/comment-ca-marche.html">Comment ça marche</a>
-          <a href="/tarifs.html">Tarifs</a>
-          <a href="/experts.html">Trouver un expert</a>
-        </div>
-        <div>
-          <p class="footer-title">Experts</p>
-          <a href="/devenir-expert.html">Devenir expert</a>
-          <a href="/signup.html">S'inscrire</a>
-          <a href="/login.html">Se connecter</a>
-        </div>
-      </div>
-      <p class="muted copyright">© 2025 Nexbuzzer. Tous droits réservés.</p>
-    </footer>
-
-    <script src="app.js"></script>
+    <script>
+      const toggleButtons = document.querySelectorAll('[data-toggle="password"]');
+      toggleButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const wrapper = btn.closest('.password-wrapper');
+          const input = wrapper?.querySelector('input');
+          if (!input) return;
+          const isText = input.type === 'text';
+          input.type = isText ? 'password' : 'text';
+          btn.textContent = isText ? 'Show' : 'Hide';
+        });
+      });
+    </script>
   </body>
 </html>
