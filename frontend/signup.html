@@ -31,9 +31,9 @@
             <p>Choisissez votre type de compte pour commencer</p>
           </div>
 
-          <div class="grid two signup-card__types">
-            <label class="account-type-card">
-              <input type="radio" name="accountType" value="client" class="sr-only" />
+          <div class="grid two signup-card__types" id="account-types">
+            <label class="account-type-card selected" data-type="client">
+              <input type="radio" name="accountType" value="client" class="sr-only" checked />
               <div class="card-content">
                 <div class="icon-circle bg-primary-100">
                   <svg class="w-8 h-8 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
@@ -45,12 +45,12 @@
               </div>
               <div class="checkmark">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
                 </svg>
               </div>
             </label>
 
-            <label class="account-type-card">
+            <label class="account-type-card" data-type="expert">
               <input type="radio" name="accountType" value="expert" class="sr-only" />
               <div class="card-content">
                 <div class="icon-circle bg-success-100">
@@ -64,7 +64,7 @@
               </div>
               <div class="checkmark">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
                 </svg>
               </div>
             </label>
@@ -111,7 +111,7 @@
             <span>OU</span>
           </div>
 
-          <button class="btn-google">
+          <button type="button" class="btn-google" id="google-button">
             <svg class="w-5 h-5" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
               <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
@@ -136,6 +136,21 @@
         const isText = passwordInput.type === 'text';
         passwordInput.type = isText ? 'password' : 'text';
         toggle.textContent = isText ? 'Afficher' : 'Masquer';
+      });
+
+      const accountTypes = document.getElementById('account-types');
+      accountTypes?.addEventListener('change', (event) => {
+        if (!(event.target instanceof HTMLInputElement)) return;
+        const selectedValue = event.target.value;
+        accountTypes.querySelectorAll('.account-type-card').forEach((card) => {
+          const type = card.getAttribute('data-type');
+          card.classList.toggle('selected', type === selectedValue);
+        });
+      });
+
+      const googleButton = document.getElementById('google-button');
+      googleButton?.addEventListener('click', () => {
+        console.info('Google login flow would start here.');
       });
     </script>
   </body>
