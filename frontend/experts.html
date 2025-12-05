@@ -65,39 +65,79 @@
         </div>
       </section>
 
-      <section class="container layout">
-        <aside class="sidebar">
-          <div class="filter-group">
-            <p class="filter-title">Catégorie</p>
-            <div id="filter-categories"></div>
+      <section class="experts-layout">
+        <aside class="filters-sidebar">
+          <div class="bg-white rounded-2xl shadow-md p-6">
+            <div class="filters-header">
+              <h3>Filtres</h3>
+              <span>245 experts</span>
+            </div>
+
+            <div class="filter-section">
+              <h4 class="filter-title">Catégorie</h4>
+              <div class="filter-list">
+                <label class="filter-checkbox-custom"><input type="checkbox" value="coaching" /><span class="checkbox-mark"></span><span class="checkbox-label">Coachs</span><span class="checkbox-count">(245)</span></label>
+                <label class="filter-checkbox-custom"><input type="checkbox" value="tech" /><span class="checkbox-mark"></span><span class="checkbox-label">Tech &amp; Dev</span><span class="checkbox-count">(189)</span></label>
+                <label class="filter-checkbox-custom"><input type="checkbox" value="business" /><span class="checkbox-mark"></span><span class="checkbox-label">Business</span><span class="checkbox-count">(312)</span></label>
+                <label class="filter-checkbox-custom"><input type="checkbox" value="creation" /><span class="checkbox-mark"></span><span class="checkbox-label">Créateurs</span><span class="checkbox-count">(156)</span></label>
+                <label class="filter-checkbox-custom"><input type="checkbox" value="bien-etre" /><span class="checkbox-mark"></span><span class="checkbox-label">Bien-être</span><span class="checkbox-count">(178)</span></label>
+                <label class="filter-checkbox-custom"><input type="checkbox" value="juridique" /><span class="checkbox-mark"></span><span class="checkbox-label">Juridique</span><span class="checkbox-count">(93)</span></label>
+                <label class="filter-checkbox-custom"><input type="checkbox" value="finance" /><span class="checkbox-mark"></span><span class="checkbox-label">Finance</span><span class="checkbox-count">(124)</span></label>
+                <label class="filter-checkbox-custom"><input type="checkbox" value="langues" /><span class="checkbox-mark"></span><span class="checkbox-label">Langues</span><span class="checkbox-count">(87)</span></label>
+              </div>
+            </div>
+
+            <div class="filter-section">
+              <h4 class="filter-title">Tarif / minute</h4>
+              <div class="filter-range">
+                <input type="range" min="0" max="10" value="10" class="price-slider" id="price-range" />
+                <div class="range-meta">
+                  <span>0€</span>
+                  <span class="highlight">Jusqu'à <span id="price-value">10</span>€</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-section">
+              <h4 class="filter-title">Disponibilité</h4>
+              <div class="filter-list">
+                <label class="filter-checkbox-custom available"><input type="checkbox" value="disponible" checked /><span class="checkbox-mark green"></span><span class="checkbox-label">🟢 Disponible maintenant</span></label>
+                <label class="filter-checkbox-custom"><input type="checkbox" value="planning" /><span class="checkbox-mark"></span><span class="checkbox-label">Aujourd'hui</span></label>
+                <label class="filter-checkbox-custom"><input type="checkbox" value="planning" /><span class="checkbox-mark"></span><span class="checkbox-label">Cette semaine</span></label>
+              </div>
+            </div>
+
+            <div class="filter-section">
+              <h4 class="filter-title">Note minimale</h4>
+              <div class="filter-range">
+                <input type="range" min="0" max="5" step="0.5" value="0" class="rating-slider" id="rating-range" />
+                <div class="range-meta">
+                  <span>0 ⭐</span>
+                  <span class="highlight warning"><span id="rating-value">0</span> ⭐ minimum</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-section">
+              <h4 class="filter-title">Badges</h4>
+              <div class="filter-list">
+                <label class="filter-checkbox-custom"><input type="checkbox" value="verifie" /><span class="checkbox-mark"></span><span class="checkbox-label">✓ Vérifié</span></label>
+                <label class="filter-checkbox-custom"><input type="checkbox" value="top" /><span class="checkbox-mark"></span><span class="checkbox-label">🏆 Top Expert</span></label>
+                <label class="filter-checkbox-custom"><input type="checkbox" value="certifie" /><span class="checkbox-mark"></span><span class="checkbox-label">📜 Certifié</span></label>
+              </div>
+            </div>
+
+            <button class="btn-reset-filters" id="clear-filters">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              Réinitialiser les filtres
+            </button>
           </div>
-          <div class="filter-group">
-            <p class="filter-title">Tarif / minute</p>
-            <input type="range" id="price-range" min="0" max="10" step="0.5" value="10" />
-            <p class="muted">Jusqu'à <span id="price-value">10€</span>/min</p>
-          </div>
-          <div class="filter-group">
-            <p class="filter-title">Disponibilité</p>
-            <label class="filter-checkbox"><input type="checkbox" value="disponible" checked /><span class="checkmark"></span><span class="label-text">🟢 Disponible maintenant</span></label>
-            <label class="filter-checkbox"><input type="checkbox" value="aujourdhui" /><span class="checkmark"></span><span class="label-text">Aujourd'hui</span></label>
-            <label class="filter-checkbox"><input type="checkbox" value="planning" /><span class="checkmark"></span><span class="label-text">Cette semaine</span></label>
-          </div>
-          <div class="filter-group">
-            <p class="filter-title">Note minimale</p>
-            <input type="range" id="rating-range" min="0" max="5" step="0.1" value="0" />
-            <p class="muted">⭐ <span id="rating-value">0</span> minimum</p>
-          </div>
-          <div class="filter-group">
-            <p class="filter-title">Badges</p>
-            <label class="filter-checkbox"><input type="checkbox" value="verifie" /><span class="checkmark"></span><span class="label-text">Vérifié</span></label>
-            <label class="filter-checkbox"><input type="checkbox" value="top" /><span class="checkmark"></span><span class="label-text">Top Expert</span></label>
-            <label class="filter-checkbox"><input type="checkbox" value="certifie" /><span class="checkmark"></span><span class="label-text">Certifié</span></label>
-          </div>
-          <button class="ghost" id="clear-filters">Effacer les filtres</button>
         </aside>
 
         <section class="results">
-          <div class="grid three" id="experts-grid"></div>
+          <div class="experts-grid" id="experts-grid"></div>
           <div class="pagination" id="pagination"></div>
         </section>
       </section>
