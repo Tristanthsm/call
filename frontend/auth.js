@@ -1,16 +1,13 @@
 (() => {
-  const DEFAULT_SUPABASE_URL = 'https://btnruneapntfneomhvao.supabase.co';
-  const DEFAULT_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0bnJ1bmVhcG50Zm5lb21odmFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ4NzUzMDYsImV4cCI6MjA4MDQ1MTMwNn0.vxCpg-P7afngCr1aJf51ONBQDkZw7qWmXtIxrmmTOIkANON_SUPABASE_ICI';
+  const SUPABASE_URL = window.SUPABASE_URL;
+  const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY;
 
-  const SUPABASE_URL = window.SUPABASE_URL || DEFAULT_SUPABASE_URL;
-  const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || DEFAULT_SUPABASE_ANON_KEY;
-
-  const hasValidConfig = SUPABASE_URL && SUPABASE_ANON_KEY && !SUPABASE_ANON_KEY.includes('VOTRE_CLE_ANON');
+  const hasValidConfig = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY && !SUPABASE_ANON_KEY.includes('VOTRE_CLE_ANON'));
   const supabaseClient = window.supabase && hasValidConfig ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
   if (!window.supabase) console.warn('Supabase SDK introuvable (cdn/jsdelivr).');
   if (!hasValidConfig) {
-    console.warn('Configurez SUPABASE_URL et SUPABASE_ANON_KEY (via variables globales ou directement dans auth.js).');
+    console.warn('Configurez SUPABASE_URL et SUPABASE_ANON_KEY (via config.js ou directement dans la page).');
   }
 
   function showFeedback(id, message, tone = 'error') {
