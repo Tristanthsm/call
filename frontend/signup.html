@@ -28,83 +28,53 @@
         <div class="signup-card">
           <div class="signup-card__header">
             <h1>Créer un compte</h1>
-            <p>Choisissez votre type de compte pour commencer</p>
+            <p>Créez votre compte en 1 minute. Vous choisirez ensuite si vous êtes client ou expert.</p>
           </div>
 
-          <div class="grid two signup-card__types" id="account-types">
-            <label class="account-type-card selected" data-type="client">
-              <input type="radio" name="accountType" value="client" class="sr-only" checked />
-              <div class="card-content">
-                <div class="icon-circle bg-primary-100">
-                  <svg class="w-8 h-8 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
-                  </svg>
-                </div>
-                <h3>Je cherche un expert</h3>
-                <p>Accédez à des milliers d'experts disponibles en temps réel</p>
-              </div>
-              <div class="checkmark">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
-                </svg>
-              </div>
-            </label>
-
-            <label class="account-type-card" data-type="expert">
-              <input type="radio" name="accountType" value="expert" class="sr-only" />
-              <div class="card-content">
-                <div class="icon-circle bg-success-100">
-                  <svg class="w-8 h-8 text-success-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" />
-                    <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
-                  </svg>
-                </div>
-                <h3>Je suis un expert</h3>
-                <p>Monétisez votre expertise à la minute. Commission 15%</p>
-              </div>
-              <div class="checkmark">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
-                </svg>
-              </div>
-            </label>
-          </div>
-
-          <form class="signup-form">
+          <form class="signup-form" id="signup-form">
             <div class="grid two">
               <div>
-                <label class="form-label">Prénom</label>
-                <input type="text" class="form-input" placeholder="Sophie" />
+                <label class="form-label" for="firstName">Prénom</label>
+                <input id="firstName" name="firstName" type="text" class="form-input" placeholder="Sophie" required />
               </div>
               <div>
-                <label class="form-label">Nom</label>
-                <input type="text" class="form-input" placeholder="Martin" />
+                <label class="form-label" for="lastName">Nom</label>
+                <input id="lastName" name="lastName" type="text" class="form-input" placeholder="Martin" required />
               </div>
             </div>
 
             <div>
-              <label class="form-label">Adresse email</label>
-              <input type="email" class="form-input" placeholder="sophie@exemple.fr" />
+              <label class="form-label" for="signup-email">Adresse email</label>
+              <input id="signup-email" name="email" type="email" class="form-input" placeholder="sophie@exemple.fr" required />
             </div>
 
             <div>
-              <label class="form-label">Mot de passe</label>
+              <label class="form-label" for="signup-password">Mot de passe</label>
               <div class="relative">
-                <input type="password" class="form-input pr-12" placeholder="- - - - - - - - " />
-                <button type="button" class="password-toggle">Afficher</button>
+                <input
+                  id="signup-password"
+                  name="password"
+                  type="password"
+                  class="form-input pr-12"
+                  placeholder="- - - - - - - - "
+                  autocomplete="new-password"
+                  required
+                />
+                <button type="button" class="password-toggle" data-toggle="password">Afficher</button>
               </div>
               <p class="text-xs text-gray-500 mt-2">Minimum 8 caractères avec majuscule, minuscule et chiffre</p>
             </div>
 
             <div class="signup-terms">
-              <input type="checkbox" id="terms" />
+              <input type="checkbox" id="terms" required />
               <label for="terms">
                 J'accepte les <a href="/cgu">Conditions Générales d'Utilisation</a> et la
                 <a href="/confidentialite">Politique de confidentialité</a>
               </label>
             </div>
 
-            <button type="submit" class="btn-submit">Créer mon compte gratuitement</button>
+            <div class="form-feedback" id="signup-feedback" aria-live="polite"></div>
+            <button type="submit" class="btn-submit" data-label="Créer mon compte gratuitement">Créer mon compte gratuitement</button>
           </form>
 
           <div class="signup-separator">
@@ -121,37 +91,14 @@
             Continuer avec Google
           </button>
 
-          <p class="signup-footer">
-            Vous avez déjà un compte ? <a href="/login.html">Se connecter</a>
-          </p>
+            <p class="signup-footer">
+              Vous avez déjà un compte ? <a href="/login.html">Se connecter</a>
+            </p>
+          </div>
         </div>
-      </div>
     </div>
 
-    <script>
-      const toggle = document.querySelector('.password-toggle');
-      const passwordInput = document.querySelector('.form-input[type="password"]');
-      toggle?.addEventListener('click', () => {
-        if (!passwordInput) return;
-        const isText = passwordInput.type === 'text';
-        passwordInput.type = isText ? 'password' : 'text';
-        toggle.textContent = isText ? 'Afficher' : 'Masquer';
-      });
-
-      const accountTypes = document.getElementById('account-types');
-      accountTypes?.addEventListener('change', (event) => {
-        if (!(event.target instanceof HTMLInputElement)) return;
-        const selectedValue = event.target.value;
-        accountTypes.querySelectorAll('.account-type-card').forEach((card) => {
-          const type = card.getAttribute('data-type');
-          card.classList.toggle('selected', type === selectedValue);
-        });
-      });
-
-      const googleButton = document.getElementById('google-button');
-      googleButton?.addEventListener('click', () => {
-        console.info('Google login flow would start here.');
-      });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.2/dist/umd/supabase.js"></script>
+    <script src="auth.js"></script>
   </body>
 </html>

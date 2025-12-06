@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign in | Nexbuzzer</title>
+    <title>Connexion | Nexbuzzer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -30,78 +30,48 @@
             </g>
           </svg>
           <div class="auth-card__title">
-            <h1>Create an account</h1>
-            <p>Welcome! Create an account to get started.</p>
+            <h1>Connexion</h1>
+            <p>Accédez à vos appels et à vos favoris depuis un seul compte.</p>
           </div>
         </header>
 
         <div class="auth-card__content">
-          <div class="field">
-            <label for="role">Role</label>
-            <div class="select-wrapper">
-              <select id="role" aria-label="Select role">
-                <option value="designer" selected>Product Designer</option>
-                <option value="developer">Developer</option>
-                <option value="manager">Product Manager</option>
-              </select>
+          <div class="form-feedback" id="login-feedback" aria-live="polite"></div>
+          <form id="login-form" class="auth-form">
+            <div class="field">
+              <label for="login-email">Email</label>
+              <input id="login-email" name="email" type="email" autocomplete="email" required />
             </div>
-          </div>
 
-          <div class="field two-columns">
-            <div>
-              <label for="firstName">First name</label>
-              <input id="firstName" type="text" />
+            <div class="field">
+              <label for="login-password">Mot de passe</label>
+              <div class="password-wrapper">
+                <input
+                  id="login-password"
+                  name="password"
+                  type="password"
+                  class="with-action"
+                  autocomplete="current-password"
+                  required
+                />
+                <button type="button" class="icon-button" data-toggle="password" aria-label="Afficher/masquer le mot de passe">
+                  Afficher
+                </button>
+              </div>
+              <p class="form-subtext">Un seul compte suffit : client ou expert, vous choisissez après connexion.</p>
             </div>
-            <div>
-              <label for="lastName">Last name</label>
-              <input id="lastName" type="text" />
-            </div>
-          </div>
 
-          <div class="field">
-            <label for="username">Username</label>
-            <input id="username" type="text" />
-          </div>
-
-          <div class="field">
-            <label for="email">Email address</label>
-            <input id="email" type="email" />
-          </div>
-
-          <div class="field">
-            <label for="password">Password</label>
-            <div class="password-wrapper">
-              <input id="password" type="password" class="with-action" />
-              <button type="button" class="icon-button" data-toggle="password" aria-label="Toggle password">Show</button>
-            </div>
-          </div>
-
-          <label class="checkbox">
-            <input id="terms" type="checkbox" />
-            <span>I agree to the <a href="#">Terms</a> and <a href="#">Conditions</a></span>
-          </label>
-
-          <button class="primary wide" type="button">Create free account</button>
+            <button class="primary wide" type="submit" data-label="Se connecter">Se connecter</button>
+          </form>
         </div>
 
         <footer class="auth-card__footer">
-          <p>Already have an account? <a href="/signup.html">Create one</a></p>
+          <p>Pas encore de compte ? <a href="/signup.html">Créer un compte</a></p>
         </footer>
       </div>
     </main>
 
-    <script>
-      const toggleButtons = document.querySelectorAll('[data-toggle="password"]');
-      toggleButtons.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const wrapper = btn.closest('.password-wrapper');
-          const input = wrapper?.querySelector('input');
-          if (!input) return;
-          const isText = input.type === 'text';
-          input.type = isText ? 'password' : 'text';
-          btn.textContent = isText ? 'Show' : 'Hide';
-        });
-      });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.2/dist/umd/supabase.js"></script>
+    <script src="auth.js"></script>
   </body>
 </html>

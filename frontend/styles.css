@@ -11,6 +11,9 @@
   --success-100: #d1fae5;
   --success-500: #10b981;
   --success-600: #059669;
+  --error-50: #fef2f2;
+  --error-100: #fee2e2;
+  --error-600: #dc2626;
   --gray-50: #f9fafb;
   --gray-100: #f3f4f6;
   --gray-200: #e5e7eb;
@@ -123,6 +126,67 @@ a {
   align-items: center;
 }
 
+.account-menu {
+  position: relative;
+}
+
+.account-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.account-trigger:hover,
+.account-menu.open .account-trigger {
+  border-color: var(--primary-500);
+  color: var(--primary-500);
+  box-shadow: var(--shadow-card);
+}
+
+.account-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.account-dropdown {
+  position: absolute;
+  right: 0;
+  top: 52px;
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--white);
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-xl);
+  min-width: 180px;
+}
+
+.account-menu.open .account-dropdown {
+  display: flex;
+}
+
+.account-dropdown a {
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.account-dropdown a:hover {
+  background: var(--primary-50);
+  color: var(--primary-600);
+}
+
 .primary,
 .ghost {
   display: inline-flex;
@@ -172,6 +236,28 @@ a {
   padding: 16px;
   background: var(--white);
   border-bottom: 1px solid var(--gray-200);
+}
+
+.mobile-menu .account-menu {
+  width: 100%;
+}
+
+.mobile-menu .account-dropdown {
+  position: static;
+  box-shadow: none;
+  border-radius: 12px;
+  border-color: var(--gray-200);
+}
+
+.mobile-menu .account-trigger {
+  width: 100%;
+  justify-content: flex-start;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.account-label {
+  font-size: 15px;
 }
 
 .hero {
@@ -937,6 +1023,36 @@ h2 {
 .checkbox a {
   color: var(--primary-500);
   font-weight: 600;
+}
+
+.form-feedback {
+  display: none;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+  background: var(--gray-50);
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.form-feedback[data-tone='error'] {
+  display: block;
+  border-color: var(--error-100);
+  background: var(--error-50);
+  color: var(--error-600);
+}
+
+.form-feedback[data-tone='success'] {
+  display: block;
+  border-color: var(--success-100);
+  background: var(--success-50);
+  color: var(--success-600);
+}
+
+.form-subtext {
+  margin: 0;
+  color: var(--gray-600);
+  font-size: 14px;
 }
 
 .auth-card__footer {

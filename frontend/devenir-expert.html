@@ -29,8 +29,18 @@
           <a href="/tarifs.html">Tarifs</a>
         </nav>
         <div class="actions">
-          <a class="ghost" href="/login.html">Se connecter</a>
-          <a class="primary" href="/signup.html">S'inscrire</a>
+          <div class="account-menu">
+            <button type="button" class="account-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Espace compte">
+              <svg class="account-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5z" />
+                <path d="M4 21a8 8 0 0 1 16 0" />
+              </svg>
+            </button>
+            <div class="account-dropdown" role="menu">
+              <a href="/login.html" role="menuitem">Se connecter</a>
+              <a href="/signup.html" role="menuitem">Créer un compte</a>
+            </div>
+          </div>
         </div>
         <button class="burger" aria-label="Ouvrir le menu">☰</button>
       </div>
@@ -41,8 +51,19 @@
       <a href="/comment-ca-marche.html">Comment ça marche</a>
       <a href="/devenir-expert.html">Devenir expert</a>
       <a href="/tarifs.html">Tarifs</a>
-      <a href="/login.html">Se connecter</a>
-      <a class="primary" href="/signup.html">S'inscrire</a>
+      <div class="account-menu">
+        <button type="button" class="account-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Espace compte">
+          <svg class="account-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5z" />
+            <path d="M4 21a8 8 0 0 1 16 0" />
+          </svg>
+          <span class="account-label">Compte</span>
+        </button>
+        <div class="account-dropdown" role="menu">
+          <a href="/login.html" role="menuitem">Se connecter</a>
+          <a href="/signup.html" role="menuitem">Créer un compte</a>
+        </div>
+      </div>
     </div>
 
     <main class="page">

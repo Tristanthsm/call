@@ -330,6 +330,40 @@ function mobileMenu() {
   burger?.addEventListener('click', () => menu?.classList.toggle('show'));
 }
 
+function accountMenus() {
+  const menus = document.querySelectorAll('.account-menu');
+  if (!menus.length) return;
+  const closeAll = () => {
+    menus.forEach((menu) => {
+      menu.classList.remove('open');
+      menu.querySelector('.account-trigger')?.setAttribute('aria-expanded', 'false');
+    });
+  };
+
+  menus.forEach((menu) => {
+    const trigger = menu.querySelector('.account-trigger');
+    const dropdown = menu.querySelector('.account-dropdown');
+    if (!trigger || !dropdown) return;
+
+    trigger.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const willOpen = !menu.classList.contains('open');
+      closeAll();
+      menu.classList.toggle('open', willOpen);
+      trigger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (event.target.closest('.account-menu')) return;
+    closeAll();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeAll();
+  });
+}
+
 renderSteps();
 renderCategories();
 renderAvailable();
@@ -347,3 +381,4 @@ renderExpertsPage();
 calculator();
 bindControls();
 mobileMenu();
+accountMenus();
