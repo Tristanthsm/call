@@ -364,6 +364,85 @@ function accountMenus() {
   });
 }
 
+function headerSession() {
+  if (!window.supabase || !window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) return;
+  const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+
+  const render = (session, profile) => {
+    document.querySelectorAll('.account-menu').forEach((menu) => {
+      const trigger = menu.querySelector('.account-trigger');
+      const dropdown = menu.querySelector('.account-dropdown');
+      if (!trigger || !dropdown) return;
+
+      if (!session) {
+        trigger.innerHTML = `
+          <svg class="account-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5z" />
+            <path d="M4 21a8 8 0 0 1 16 0" />
+          </svg>
+          <span class="account-label">Compte</span>`;
+        dropdown.innerHTML = `
+          <a href="/login.html" role="menuitem">Se connecter</a>
+          <a href="/signup.html" role="menuitem">Créer un compte</a>`;
+        trigger.setAttribute('aria-expanded', 'false');
+        menu.classList.remove('open');
+        return;
+      }
+
+      const fullName =
+        `${profile?.first_name || ''} ${profile?.last_name || ''}`.trim() ||
+        session.user.user_metadata?.full_name ||
+        '';
+      const firstName =
+        profile?.first_name ||
+        (session.user.user_metadata?.full_name || '').split(' ')[0] ||
+        session.user.email;
+      const email = profile?.email || session.user.email;
+      const userType = profile?.user_type === 'expert' ? 'expert' : 'client';
+      const initial = (profile?.first_name || session.user.email || '?').charAt(0).toUpperCase();
+
+      trigger.innerHTML = `<span class="account-avatar">${initial}</span><span class="account-label">${firstName}</span>`;
+      dropdown.innerHTML = `
+        <div class="account-info">
+          <div class="account-info__name">${fullName || firstName}</div>
+          <div class="account-info__email">${email}</div>
+          <div class="account-info__type">${userType === 'expert' ? '✨ Expert' : '👤 Client'}</div>
+        </div>
+        <a href="${userType === 'expert' ? '/expert/dashboard' : '/dashboard'}" role="menuitem">📊 Tableau de bord</a>
+        ${userType === 'expert' ? '<a href="/expert/profile" role="menuitem">⚙️ Mon profil expert</a>' : ''}
+        <a href="/settings" role="menuitem">⚙️ Paramètres</a>
+        <button type="button" class="signout-btn" data-signout>🚪 Se déconnecter</button>
+      `;
+
+      dropdown.querySelector('[data-signout]')?.addEventListener('click', async () => {
+        await client.auth.signOut();
+      });
+    });
+  };
+
+  const loadProfile = async (userId) => {
+    const { data } = await client
+      .from('profiles')
+      .select('user_id, user_type, first_name, last_name, email')
+      .eq('user_id', userId)
+      .single();
+    return data || null;
+  };
+
+  const hydrate = async () => {
+    const { data } = await client.auth.getSession();
+    const session = data.session;
+    const profile = session?.user ? await loadProfile(session.user.id) : null;
+    render(session, profile);
+  };
+
+  hydrate();
+  client.auth.onAuthStateChange(async (_event, session) => {
+    const profile = session?.user ? await loadProfile(session.user.id) : null;
+    render(session, profile);
+  });
+}
+
 renderSteps();
 renderCategories();
 renderAvailable();
@@ -382,3 +461,4 @@ calculator();
 bindControls();
 mobileMenu();
 accountMenus();
+headerSession();

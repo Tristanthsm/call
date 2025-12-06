@@ -127,65 +127,80 @@ export default function Header() {
         </nav>
 
         <div className="actions" ref={menuRef}>
-          <button
-            type="button"
-            className="account-trigger"
-            aria-haspopup="true"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            <span
-              style={{
-                width: 32,
-                height: 32,
-                borderRadius: '50%',
-                background: '#2563eb',
-                color: 'white',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginRight: 10,
-                fontWeight: 700,
-              }}
+          <div className={`account-menu ${menuOpen ? 'open' : ''}`}>
+            <button
+              type="button"
+              className="account-trigger"
+              aria-haspopup="true"
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((open) => !open)}
             >
-              {getInitial(profile, session.user.email)}
-            </span>
-            <span style={{ fontWeight: 700 }}>{fullName || profile?.first_name || email}</span>
-          </button>
-
-          {menuOpen && (
-            <div className="account-dropdown" role="menu">
-              <div style={{ padding: '8px 12px', borderBottom: '1px solid #e5e7eb' }}>
-                <div style={{ fontWeight: 700 }}>{fullName || 'Profil'}</div>
-                <div style={{ fontSize: 13, color: '#4b5563' }}>{email}</div>
-                <div style={{ marginTop: 6, fontSize: 12, color: '#111827' }}>
-                  {userType === 'expert' ? '✨ Expert' : '👤 Client'}
-                </div>
+              <span className="account-avatar">{getInitial(profile, session.user.email)}</span>
+              <div className="account-meta">
+                <span className="account-name">{fullName || profile?.first_name || email}</span>
+                <span className="account-email">{email}</span>
               </div>
+              <span className="account-caret" aria-hidden="true">
+                ▾
+              </span>
+            </button>
 
-              <a href={userType === 'expert' ? '/expert/dashboard' : '/dashboard'} role="menuitem">
-                📊 Tableau de bord
-              </a>
-              {userType === 'expert' && (
-                <a href="/expert/profile" role="menuitem">
-                  ⚙️ Mon profil expert
+            {menuOpen && (
+              <div className="account-dropdown" role="menu">
+                <div className="account-info">
+                  <div className="account-info__identity">
+                    <span className="account-avatar account-avatar--lg">{getInitial(profile, session.user.email)}</span>
+                    <div>
+                      <div className="account-info__name">{fullName || 'Profil'}</div>
+                      <div className="account-info__email">{email}</div>
+                    </div>
+                  </div>
+                  <span className={`account-badge ${userType === 'expert' ? 'is-expert' : 'is-client'}`}>
+                    {userType === 'expert' ? 'Expert' : 'Client'}
+                  </span>
+                </div>
+
+                <a
+                  className="account-link"
+                  href={userType === 'expert' ? '/expert/dashboard' : '/dashboard'}
+                  role="menuitem"
+                >
+                  <span className="account-link__icon" aria-hidden="true">
+                    📊
+                  </span>
+                  <span>Tableau de bord</span>
                 </a>
-              )}
-              <a href="/settings" role="menuitem">
-                ⚙️ Paramètres
-              </a>
-              <button
-                type="button"
-                onClick={async () => {
-                  await supabase.auth.signOut();
-                  setMenuOpen(false);
-                }}
-                style={{ color: '#dc2626', fontWeight: 700, textAlign: 'left', padding: '10px 12px' }}
-              >
-                🚪 Se déconnecter
-              </button>
-            </div>
-          )}
+                {userType === 'expert' && (
+                  <a className="account-link" href="/expert/profile" role="menuitem">
+                    <span className="account-link__icon" aria-hidden="true">
+                      🧑‍💻
+                    </span>
+                    <span>Mon profil expert</span>
+                  </a>
+                )}
+                <a className="account-link" href="/settings" role="menuitem">
+                  <span className="account-link__icon" aria-hidden="true">
+                    ⚙️
+                  </span>
+                  <span>Paramètres</span>
+                </a>
+                <button
+                  type="button"
+                  className="account-link signout-btn"
+                  onClick={async () => {
+                    await supabase.auth.signOut();
+                    setMenuOpen(false);
+                  }}
+                  role="menuitem"
+                >
+                  <span className="account-link__icon" aria-hidden="true">
+                    🚪
+                  </span>
+                  <span>Se déconnecter</span>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>

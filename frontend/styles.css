@@ -133,10 +133,10 @@ a {
 .account-trigger {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  gap: 10px;
+  padding: 8px 12px;
+  min-width: 0;
+  border-radius: 14px;
   border: 1px solid var(--gray-200);
   background: var(--white);
   box-shadow: var(--shadow-sm);
@@ -147,46 +147,164 @@ a {
 .account-trigger:hover,
 .account-menu.open .account-trigger {
   border-color: var(--primary-500);
-  color: var(--primary-500);
+  color: var(--primary-600);
   box-shadow: var(--shadow-card);
 }
 
-.account-icon {
-  width: 22px;
-  height: 22px;
+.account-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.account-avatar--lg {
+  width: 42px;
+  height: 42px;
+}
+
+.account-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+  min-width: 0;
+}
+
+.account-name {
+  font-weight: 700;
+  color: var(--gray-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-email {
+  font-size: 12px;
+  color: var(--gray-500);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-caret {
+  margin-left: 6px;
+  color: var(--gray-500);
+  font-size: 12px;
 }
 
 .account-dropdown {
   position: absolute;
   right: 0;
-  top: 52px;
-  display: none;
+  top: 56px;
+  display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   background: var(--white);
-  padding: 12px;
-  border-radius: 14px;
+  padding: 10px;
+  border-radius: 16px;
   border: 1px solid var(--gray-200);
   box-shadow: var(--shadow-xl);
-  min-width: 180px;
+  min-width: 260px;
 }
 
-.account-menu.open .account-dropdown {
+.account-info {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  background: var(--gray-50);
 }
 
-.account-dropdown a {
-  padding: 10px 12px;
-  border-radius: 10px;
-  font-weight: 600;
+.account-info__identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.account-info__name {
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.account-info__email {
+  font-size: 13px;
+  color: var(--gray-600);
+}
+
+.account-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid var(--gray-200);
   color: var(--gray-700);
+  background: var(--white);
 }
 
-.account-dropdown a:hover {
-  background: var(--primary-50);
+.account-badge.is-expert {
+  background: #f0f5ff;
   color: var(--primary-600);
+  border-color: var(--primary-200);
 }
 
+.account-badge.is-client {
+  background: #f1f5f9;
+  color: var(--gray-700);
+  border-color: var(--gray-200);
+}
+
+.account-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  color: var(--gray-800);
+  border: 1px solid transparent;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.account-link:hover {
+  background: var(--primary-50);
+  color: var(--primary-700);
+  border-color: var(--primary-100);
+}
+
+.account-link__icon {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--gray-100);
+}
+
+.signout-btn {
+  border: none;
+  color: var(--error-600);
+}
+
+.signout-btn:hover {
+  background: var(--error-50);
+  border-color: var(--error-100);
+}
 .primary,
 .ghost {
   display: inline-flex;
@@ -258,6 +376,11 @@ a {
 
 .account-label {
   font-size: 15px;
+}
+
+.mobile-menu .account-info {
+  border: none;
+  padding: 0 0 8px;
 }
 
 .hero {
