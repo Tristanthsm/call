@@ -1,13 +1,9 @@
 (() => {
-  const SUPABASE_URL = window.SUPABASE_URL;
-  const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY;
-
-  const hasValidConfig = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY && !SUPABASE_ANON_KEY.includes('VOTRE_CLE_ANON'));
-  const supabaseClient = window.supabase && hasValidConfig ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-
-  if (!window.supabase) console.warn('Supabase SDK introuvable (cdn/jsdelivr).');
-  if (!hasValidConfig) {
-    console.warn('Configurez SUPABASE_URL et SUPABASE_ANON_KEY (via config.js ou directement dans la page).');
+  // Utiliser l'instance unique de Supabase via le singleton global
+  const supabaseClient = window.getSupabaseClient ? window.getSupabaseClient() : null;
+  
+  if (!supabaseClient) {
+    console.warn('Impossible de créer le client Supabase. Vérifiez que supabase-client.js est chargé avant auth.js.');
   }
 
   function showFeedback(id, message, tone = 'error') {
@@ -46,7 +42,7 @@
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       if (!supabaseClient) {
-        showFeedback('login-feedback', 'Configuration Supabase manquante. Ajoutez SUPABASE_URL et SUPABASE_ANON_KEY.', 'error');
+        showFeedback('login-feedback', 'Configuration Supabase manquante. Veuillez recharger la page.', 'error');
         return;
       }
 
@@ -59,16 +55,61 @@
 
       showFeedback('login-feedback', '', 'error');
       setLoading(form, true);
-      const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-      setLoading(form, false);
-
+      
+      const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+      
       if (error) {
+        setLoading(form, false);
         showFeedback('login-feedback', error.message, 'error');
         return;
       }
 
+      // Vérifier que la session est bien créée après la connexion
+      if (!data.session) {
+        // Si la session n'est pas dans la réponse, attendre un peu et vérifier
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        const { data: sessionData } = await supabaseClient.auth.getSession();
+        if (!sessionData.session) {
+          setLoading(form, false);
+          showFeedback('login-feedback', 'Erreur lors de la création de la session. Veuillez réessayer.', 'error');
+          return;
+        }
+      }
+
+      // Vérifier que la session est bien persistée avant de rediriger
+      // La session devrait être dans data.session après signInWithPassword
+      const sessionToVerify = data.session;
+      
+      if (!sessionToVerify) {
+        setLoading(form, false);
+        showFeedback('login-feedback', 'Erreur : la session n\'a pas été créée. Veuillez réessayer.', 'error');
+        return;
+      }
+
       showFeedback('login-feedback', 'Connexion réussie. Redirection en cours...', 'success');
-      window.location.href = '/';
+      
+      // Forcer la persistance de la session en faisant une vérification
+      // Attendre que la session soit bien sauvegardée dans le localStorage
+      let sessionPersisted = false;
+      for (let i = 0; i < 10; i++) {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        const { data: sessionCheck } = await supabaseClient.auth.getSession();
+        if (sessionCheck.session && sessionCheck.session.access_token === sessionToVerify.access_token) {
+          sessionPersisted = true;
+          break;
+        }
+      }
+      
+      if (!sessionPersisted) {
+        setLoading(form, false);
+        showFeedback('login-feedback', 'La session n\'a pas pu être sauvegardée. Veuillez réessayer.', 'error');
+        return;
+      }
+
+      // Rediriger vers la page d'accueil
+      setLoading(form, false);
+      // Utiliser replace avec un paramètre pour forcer la détection de la session
+      window.location.replace('/?login=success');
     });
   }
 
@@ -79,7 +120,7 @@
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       if (!supabaseClient) {
-        showFeedback('signup-feedback', 'Configuration Supabase manquante. Ajoutez SUPABASE_URL et SUPABASE_ANON_KEY.', 'error');
+        showFeedback('signup-feedback', 'Configuration Supabase manquante. Veuillez recharger la page.', 'error');
         return;
       }
 
